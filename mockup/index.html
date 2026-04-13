@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solmae — Design Mockup</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,500;6..12,600;6..12,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --salmon: #FE9D94;
+      --lavender: #CCCEEF;
+      --red: #FF402E;
+      --offwhite: #FAF9F7;
+      --nearblack: #1A1A1A;
+      --gray: #6B6B6B;
+      --lightgray: #E5E3DE;
+      --white: #FFFFFF;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Nunito Sans', system-ui, sans-serif; background: var(--offwhite); color: var(--nearblack); font-size: 15px; line-height: 1.6; }
+
+    /* ── SWITCHER ── */
+    #switcher { position: fixed; top: 0; left: 0; right: 0; z-index: 9999; background: #111; padding: 8px 20px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; border-bottom: 1px solid #333; }
+    #switcher .label { color: #555; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; margin-right: 6px; white-space: nowrap; }
+    #switcher button { background: transparent; border: 1px solid #333; color: #888; padding: 4px 12px; border-radius: 20px; font-size: 11px; cursor: pointer; font-family: inherit; white-space: nowrap; transition: all 0.15s; }
+    #switcher button:hover, #switcher button.active { background: var(--salmon); border-color: var(--salmon); color: #1A1A1A; font-weight: 600; }
+
+    .screen { display: none; padding-top: 41px; }
+    .screen.active { display: block; }
+
+    /* ── SHARED NAV (authenticated) ── */
+    .nav { background: var(--white); border-bottom: 1px solid var(--lightgray); padding: 0 56px; display: flex; align-items: center; height: 60px; position: sticky; top: 41px; z-index: 100; }
+    .nav-logo { font-family: 'Libre Bodoni', Georgia, serif; font-style: italic; font-size: 20px; color: var(--nearblack); margin-right: 48px; letter-spacing: 0.5px; }
+    .nav-links { display: flex; gap: 32px; flex: 1; }
+    .nav-link { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--gray); cursor: pointer; text-decoration: none; padding: 4px 0; border-bottom: 2px solid transparent; transition: all 0.15s; }
+    .nav-link:hover { color: var(--nearblack); }
+    .nav-link.active { color: var(--nearblack); border-bottom-color: var(--salmon); }
+    .nav-right { display: flex; align-items: center; gap: 12px; }
+    .nav-avatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--lavender), #a8abdc); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #5a5e9a; cursor: pointer; }
+
+    /* ── PUBLIC NAV ── */
+    .nav-pub { background: var(--white); border-bottom: 1px solid var(--lightgray); padding: 0 56px; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+    .nav-pub-logo { font-family: 'Libre Bodoni', Georgia, serif; font-style: italic; font-size: 20px; color: var(--nearblack); }
+    .nav-pub-right { display: flex; gap: 10px; align-items: center; }
+
+    /* ── BUTTONS ── */
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 10px 24px; font-family: inherit; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; border: none; transition: all 0.2s; text-decoration: none; border-radius: 2px; }
+    .btn-dark { background: var(--nearblack); color: var(--white); }
+    .btn-dark:hover { background: #333; }
+    .btn-salmon { background: var(--salmon); color: var(--nearblack); }
+    .btn-salmon:hover { background: #fd8a7f; }
+    .btn-outline { background: transparent; color: var(--nearblack); border: 1.5px solid var(--nearblack); }
+    .btn-outline:hover { background: var(--nearblack); color: var(--white); }
+    .btn-ghost { background: transparent; color: rgba(255,255,255,0.8); border: 1.5px solid rgba(255,255,255,0.4); }
+    .btn-ghost:hover { border-color: white; color: white; }
+    .btn-sm { padding: 6px 14px; font-size: 10px; }
+    .btn-follow { padding: 6px 16px; font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; border: 1.5px solid var(--nearblack); background: transparent; cursor: pointer; border-radius: 2px; font-family: inherit; transition: all 0.2s; color: var(--nearblack); }
+    .btn-follow:hover { background: var(--nearblack); color: white; }
+    .btn-follow.following { background: var(--nearblack); color: white; }
+
+    /* ── TAGS ── */
+    .tag { display: inline-block; padding: 3px 9px; background: var(--lavender); color: #5558a0; font-size: 9px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; border-radius: 2px; }
+    .tag-sm { font-size: 9px; padding: 2px 7px; }
+
+    /* ── LAYOUT ── */
+    .container { max-width: 1248px; margin: 0 auto; padding: 0 56px; }
+    .page { max-width: 1248px; margin: 0 auto; padding: 52px 56px; }
+
+    /* ── FILTER BAR ── */
+    .filter-bar { display: flex; align-items: center; gap: 16px; margin-bottom: 40px; padding-bottom: 24px; border-bottom: 1px solid var(--lightgray); flex-wrap: wrap; }
+    .search { flex: 1; max-width: 280px; padding: 9px 14px; border: 1.5px solid var(--lightgray); border-radius: 2px; font-family: inherit; font-size: 13px; background: white; outline: none; transition: border-color 0.2s; }
+    .search:focus { border-color: var(--nearblack); }
+    .filter-chip { padding: 5px 14px; border: 1.5px solid var(--lightgray); border-radius: 20px; font-size: 11px; font-weight: 600; letter-spacing: 0.3px; cursor: pointer; background: white; color: var(--gray); transition: all 0.15s; }
+    .filter-chip:hover { border-color: var(--nearblack); color: var(--nearblack); }
+    .filter-chip.active { border-color: var(--nearblack); background: var(--nearblack); color: white; }
+
+    /* ════════════════════════════════════
+       SCREEN 1 — LANDING
+    ════════════════════════════════════ */
+    .hero { background: var(--nearblack); padding: 96px 56px 88px; text-align: center; position: relative; overflow: hidden; }
+    .hero-bg-s { font-family: 'Libre Bodoni', serif; font-style: italic; font-size: 600px; color: rgba(254,157,148,0.05); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); line-height: 1; pointer-events: none; user-select: none; letter-spacing: -20px; }
+    .hero-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--salmon); margin-bottom: 28px; }
+    .hero-title { font-family: 'Libre Bodoni', Georgia, serif; font-size: 64px; font-weight: 400; color: white; line-height: 1.1; max-width: 700px; margin: 0 auto 20px; letter-spacing: -1.5px; }
+    .hero-title em { color: var(--salmon); font-style: italic; }
+    .hero-sub { font-size: 16px; color: rgba(255,255,255,0.55); max-width: 420px; margin: 0 auto 44px; font-weight: 300; line-height: 1.8; }
+    .hero-ctas { display: flex; gap: 12px; justify-content: center; }
+
+    .landing-section { padding: 72px 56px; max-width: 1248px; margin: 0 auto; }
+    .section-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gray); margin-bottom: 6px; }
+    .section-title { font-family: 'Libre Bodoni', Georgia, serif; font-size: 36px; font-weight: 400; color: var(--nearblack); margin-bottom: 8px; letter-spacing: -0.5px; }
+    .section-sub { font-size: 14px; color: var(--gray); max-width: 480px; margin-bottom: 44px; line-height: 1.7; }
+
+    .pub-creators-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .pub-creator-card { background: white; border: 1px solid var(--lightgray); padding: 28px 20px 24px; text-align: center; position: relative; overflow: hidden; }
+    .pub-creator-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(250,249,247,0.6) 0%, transparent 60%); pointer-events: none; }
+    .pub-avatar { width: 76px; height: 76px; border-radius: 50%; margin: 0 auto 14px; display: flex; align-items: center; justify-content: center; font-family: 'Libre Bodoni', serif; font-style: italic; font-size: 28px; color: white; overflow: hidden; }
+    .pub-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: block; }
+    .pub-creator-name { font-family: 'Libre Bodoni', Georgia, serif; font-size: 16px; font-weight: 500; color: var(--nearblack); margin-bottom: 8px; }
+    .pub-creator-tags { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; }
+
+    .landing-divider { border: none; border-top: 1px solid var(--lightgray); margin: 0 56px; }
+
+    .landing-about { padding: 80px 56px; background: var(--nearblack); display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .about-title { font-family: 'Libre Bodoni', serif; font-size: 40px; font-weight: 400; color: white; line-height: 1.2; letter-spacing: -0.5px; margin-bottom: 20px; }
+    .about-title em { color: var(--salmon); font-style: italic; }
+    .about-text { font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.9; margin-bottom: 32px; font-weight: 300; }
+    .about-right { display: flex; flex-direction: column; gap: 24px; }
+    .about-stat { border-left: 2px solid var(--salmon); padding-left: 20px; }
+    .about-stat-num { font-family: 'Libre Bodoni', serif; font-size: 40px; color: white; line-height: 1; margin-bottom: 4px; }
+    .about-stat-label { font-size: 13px; color: rgba(255,255,255,0.5); }
+
+    /* ════════════════════════════════════
+       SCREEN 2 — INVITE GATE
+    ════════════════════════════════════ */
+    .invite-wrap { min-height: calc(100vh - 41px); display: flex; flex-direction: column; }
+    .invite-body { flex: 1; display: flex; align-items: center; justify-content: center; padding: 80px 24px; }
+    .invite-box { width: 100%; max-width: 460px; text-align: center; }
+    .invite-s { font-family: 'Libre Bodoni', serif; font-style: italic; font-size: 88px; color: var(--salmon); line-height: 1; margin-bottom: 36px; }
+    .invite-title { font-family: 'Libre Bodoni', Georgia, serif; font-size: 36px; font-weight: 400; color: var(--nearblack); margin-bottom: 10px; letter-spacing: -0.5px; }
+    .invite-sub { font-size: 14px; color: var(--gray); margin-bottom: 44px; line-height: 1.7; max-width: 340px; margin-left: auto; margin-right: auto; }
+    .code-input { width: 100%; padding: 16px 20px; border: 2px solid var(--lightgray); border-radius: 3px; font-family: inherit; font-size: 20px; text-align: center; letter-spacing: 6px; text-transform: uppercase; color: var(--nearblack); background: white; outline: none; transition: border-color 0.2s; margin-bottom: 12px; }
+    .code-input:focus { border-color: var(--nearblack); }
+    .code-input::placeholder { letter-spacing: 2px; color: #ccc; font-size: 14px; }
+    .invite-footnote { font-size: 13px; color: var(--gray); margin-top: 28px; }
+    .invite-footnote a { color: var(--nearblack); font-weight: 600; text-decoration: underline; cursor: pointer; }
+    .divider-or { display: flex; align-items: center; gap: 16px; margin: 32px 0; }
+    .divider-line { flex: 1; height: 1px; background: var(--lightgray); }
+    .divider-text { font-size: 11px; color: var(--gray); letter-spacing: 1px; text-transform: uppercase; }
+
+    /* Apology modal */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(26,26,26,0.75); z-index: 500; display: flex; align-items: center; justify-content: center; }
+    .modal { background: white; padding: 52px 48px; max-width: 460px; width: 90%; text-align: center; }
+    .modal-s { font-family: 'Libre Bodoni', serif; font-style: italic; font-size: 52px; color: var(--lavender); margin-bottom: 24px; }
+    .modal h2 { font-family: 'Libre Bodoni', serif; font-size: 28px; font-weight: 400; margin-bottom: 14px; letter-spacing: -0.3px; }
+    .modal p { color: var(--gray); font-size: 14px; line-height: 1.8; margin-bottom: 32px; }
+    .modal-input { width: 100%; padding: 12px 16px; border: 1.5px solid var(--lightgray); border-radius: 2px; font-family: inherit; font-size: 15px; margin-bottom: 12px; outline: none; transition: border-color 0.2s; }
+    .modal-input:focus { border-color: var(--nearblack); }
+    .modal-note { font-size: 12px; color: var(--gray); margin-top: 16px; }
+
+    /* ════════════════════════════════════
+       SCREEN 3 — ONBOARDING
+    ════════════════════════════════════ */
+    .onboard-wrap { min-height: calc(100vh - 41px); }
+    .onboard-header { border-bottom: 1px solid var(--lightgray); padding: 0 56px; height: 60px; display: flex; align-items: center; background: white; }
+    .onboard-logo { font-family: 'Libre Bodoni', serif; font-style: italic; font-size: 20px; color: var(--nearblack); }
+    .onboard-body { max-width: 920px; margin: 0 auto; padding: 64px 56px; display: grid; grid-template-columns: 220px 1fr; gap: 72px; }
+    .step-list { padding-top: 4px; }
+    .step-row { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 0; }
+    .step-connector { display: flex; flex-direction: column; align-items: center; }
+    .step-dot { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--lightgray); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: var(--gray); flex-shrink: 0; background: white; transition: all 0.2s; }
+    .step-dot.done { background: var(--salmon); border-color: var(--salmon); color: white; }
+    .step-dot.active { background: var(--nearblack); border-color: var(--nearblack); color: white; }
+    .step-vline { width: 2px; height: 32px; background: var(--lightgray); margin: 4px 0; }
+    .step-vline.done { background: var(--salmon); }
+    .step-info { padding-top: 4px; padding-bottom: 36px; }
+    .step-label { font-size: 13px; font-weight: 700; color: var(--nearblack); margin-bottom: 2px; }
+    .step-label.dim { color: var(--gray); font-weight: 500; }
+    .step-desc { font-size: 12px; color: var(--gray); }
+
+    .onboard-content {}
+    .onboard-title { font-family: 'Libre Bodoni', Georgia, serif; font-size: 32px; font-weight: 400; color: var(--nearblack); margin-bottom: 8px; letter-spacing: -0.3px; }
+    .onboard-sub { font-size: 14px; color: var(--gray); margin-bottom: 40px; line-height: 1.7; }
+
+    .role-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 36px; }
+    .role-card { border: 2px solid var(--lightgray); padding: 28px 24px; cursor: pointer; transition: all 0.2s; }
+    .role-card.selected { border-color: var(--nearblack); background: var(--nearblack); }
+    .role-radio { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--lightgray); margin-bottom: 16px; position: relative; }
+    .role-card.selected .role-radio { border-color: var(--salmon); background: var(--salmon); }
+    .role-card.selected .role-radio::after { content: ''; position: absolute; width: 8px; height: 8px; border-radius: 50%; background: white; top: 3px; left: 3px; }
+    .role-title { font-family: 'Libre Bodoni', serif; font-size: 20px; font-weight: 500; margin-bottom: 8px; }
+    .role-card.selected .role-title { color: white; }
+    .role-desc { font-size: 13px; color: var(--gray); line-height: 1.5; }
+    .role-card.selected .role-desc { color: rgba(255,255,255,0.6); }
+
+    .oauth-btns { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+    .oauth-btn { display: flex; align-items: center; gap: 14px; padding: 14px 20px; border: 1.5px solid var(--lightgray); border-radius: 3px; background: white; font-family: inherit; font-size: 15px; font-weight: 500; cursor: pointer; transition: border-color 0.2s; }
+    .oauth-btn:hover { border-color: var(--nearblack); }
+    .oauth-icon { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: white; flex-shrink: 0; }
+
+    .form-group { margin-bottom: 20px; }
+    .form-label { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: var(--nearblack); margin-bottom: 8px; }
+    .form-label .opt { color: var(--gray); font-weight: 400; text-transform: none; letter-spacing: 0; font-size: 11px; }
+    .form-input { width: 100%; padding: 10px 13px; border: 1.5px solid var(--lightgray); border-radius: 2px; font-family: inherit; font-size: 14px; color: var(--nearblack); background: white; outline: none; transition: border-color 0.2s; }
+    .form-input:focus { border-color: var(--nearblack); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .social-row { display: flex; border: 1.5px solid var(--lightgray); border-radius: 2px; overflow: hidden; transition: border-color 0.2s; }
+    .social-row:focus-within { border-color: var(--nearblack); }
+    .social-pre { padding: 10px 12px; background: #F5F3EF; font-size: 11px; font-weight: 700; color: var(--gray); border-right: 1.5px solid var(--lightgray); white-space: nowrap; display: flex; align-items: center; }
+    .social-in { flex: 1; padding: 10px 12px; border: none; font-family: inherit; font-size: 14px; background: white; outline: none; }
+    .social-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .topics-wrap { display: flex; flex-wrap: wrap; gap: 8px; }
+    .topic-chip { padding: 7px 16px; border: 1.5px solid var(--lightgray); border-radius: 20px; font-size: 13px; cursor: pointer; background: white; transition: all 0.15s; }
+    .topic-chip.on { background: var(--lavender); border-color: #a8abdc; color: #4a4e8a; font-weight: 600; }
+    .photo-drop { border: 2px dashed var(--lightgray); border-radius: 3px; padding: 36px 24px; text-align: center; cursor: pointer; transition: border-color 0.2s; }
+    .photo-drop:hover { border-color: var(--nearblack); }
+    .photo-drop-circle { width: 56px; height: 56px; border-radius: 50%; background: var(--lavender); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+    .photo-drop p { font-size: 14px; color: var(--gray); }
+    .photo-drop strong { color: var(--nearblack); }
+
+    /* ════════════════════════════════════
+       SCREEN 4 — THE EDITION
+    ════════════════════════════════════ */
+    .edition-hdr { padding: 44px 56px 36px; border-bottom: 1px solid var(--lightgray); display: flex; align-items: flex-end; justify-content: space-between; background: white; }
+    .edition-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--salmon); margin-bottom: 6px; }
+    .edition-masthead { font-family: 'Libre Bodoni', Georgia, serif; font-size: 56px; font-weight: 400; color: var(--nearblack); letter-spacing: -2px; line-height: 1; }
+    .edition-meta { text-align: right; }
+    .edition-date { font-size: 13px; color: var(--gray); margin-bottom: 4px; }
+    .edition-count { font-size: 12px; color: var(--gray); }
+
+    .edition-grid { display: grid; grid-template-columns: 7fr 5fr; grid-template-rows: auto auto; gap: 1px; background: var(--lightgray); }
+    .e-card { background: white; padding: 36px; display: flex; flex-direction: column; }
+    .e-card-hero { grid-row: 1 / 3; }
+    .e-thumb { width: 100%; border-radius: 2px; margin-bottom: 22px; display: flex; align-items: center; justify-content: center; font-size: 36px; }
+    .e-thumb-hero { aspect-ratio: 4/3; }
+    .e-thumb-sm { aspect-ratio: 16/9; }
+    .e-byline { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .e-byline-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--salmon); display: inline-block; }
+    .e-title { font-family: 'Libre Bodoni', Georgia, serif; font-size: 28px; font-weight: 400; color: var(--nearblack); line-height: 1.25; margin-bottom: 14px; letter-spacing: -0.3px; flex: 1; }
+    .e-title-sm { font-family: 'Libre Bodoni', Georgia, serif; font-size: 20px; font-weight: 400; color: var(--nearblack); line-height: 1.3; margin-bottom: 10px; letter-spacing: -0.2px; flex: 1; }
+    .e-desc { font-size: 14px; color: var(--gray); line-height: 1.8; margin-bottom: 22px; }
+    .e-actions { display: flex; gap: 20px; align-items: center; padding-top: 18px; border-top: 1px solid var(--lightgray); margin-top: auto; }
+    .e-action { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--gray); cursor: pointer; font-weight: 600; transition: color 0.15s; letter-spacing: 0.3px; }
+    .e-action:hover { color: var(--nearblack); }
+    .e-action.liked { color: var(--red); }
+    .e-action-icon { font-size: 15px; }
+    .e-read { margin-left: auto; font-size: 11px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: var(--nearblack); text-decoration: none; border-bottom: 1.5px solid var(--nearblack); padding-bottom: 1px; cursor: pointer; }
+
+    /* ════════════════════════════════════
+       SCREEN 5 — CREATORS GRID
+    ════════════════════════════════════ */
+    .creators-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .c-card { background: white; border: 1px solid var(--lightgray); overflow: hidden; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
+    .c-card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,0.08); }
+    .c-photo { width: 100%; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-family: 'Libre Bodoni', serif; font-style: italic; font-size: 52px; color: white; overflow: hidden; }
+    .c-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+    .c-body { padding: 18px 18px 14px; }
+    .c-name { font-family: 'Libre Bodoni', Georgia, serif; font-size: 17px; font-weight: 500; color: var(--nearblack); margin-bottom: 6px; }
+    .c-handle { font-size: 12px; color: var(--gray); margin-bottom: 10px; }
+    .c-tags { display: flex; flex-wrap: wrap; gap: 4px; min-height: 22px; }
+    .c-footer { padding: 12px 18px; border-top: 1px solid var(--lightgray); display: flex; justify-content: space-between; align-items: center; }
+
+    /* ════════════════════════════════════
+       SCREEN 6 — CREATOR PROFILE
+    ════════════════════════════════════ */
+    .cp-header { background: white; padding: 52px 56px 48px; border-bottom: 1px solid var(--lightgray); }
+    .cp-inner { max-width: 1248px; margin: 0 auto; display: grid; grid-template-columns: 160px 1fr auto; gap: 40px; align-items: start; }
+    .cp-avatar { width: 160px; height: 160px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Libre Bodoni', serif; font-style: italic; font-size: 56px; color: white; overflow: hidden; }
+    .cp-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 50%; display: block; }
+    .e-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 2px; }
+    .feed-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .q-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 2px; }
+    .cp-info {}
+    .cp-name { font-family: 'Libre Bodoni', Georgia, serif; font-size: 40px; font-weight: 400; color: var(--nearblack); margin-bottom: 4px; letter-spacing: -0.5px; }
+    .cp-handle { font-size: 14px; color: var(--gray); margin-bottom: 14px; }
+    .cp-bio { font-size: 15px; color: var(--nearblack); line-height: 1.75; max-width: 540px; margin-bottom: 20px; }
+    .cp-socials { display: flex; gap: 8px; flex-wrap: wrap; }
+    .cp-social { display: flex; align-items: center; gap: 6px; padding: 5px 12px; border: 1px solid var(--lightgray); border-radius: 2px; font-size: 11px; font-weight: 600; color: var(--gray); cursor: pointer; transition: all 0.15s; letter-spacing: 0.3px; }
+    .cp-social:hover { border-color: var(--nearblack); color: var(--nearblack); }
+    .cp-right { text-align: right; padding-top: 8px; }
+    .cp-stat { margin-bottom: 20px; }
+    .cp-stat-num { font-family: 'Libre Bodoni', serif; font-size: 36px; color: var(--nearblack); line-height: 1; }
+    .cp-stat-label { font-size: 11px; color: var(--gray); letter-spacing: 0.5px; }
+
+    .cp-feed { padding: 48px 56px; max-width: 1248px; margin: 0 auto; }
+    .feed-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; }
+    .feed-title { font-family: 'Libre Bodoni', serif; font-size: 24px; font-weight: 400; color: var(--nearblack); }
+    .feed-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .feed-card { background: white; border: 1px solid var(--lightgray); overflow: hidden; cursor: pointer; transition: transform 0.2s; }
+    .feed-card:hover { transform: translateY(-2px); }
+    .feed-thumb { width: 100%; aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; font-size: 28px; }
+    .feed-body { padding: 16px; }
+    .feed-type { font-size: 9px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--gray); margin-bottom: 6px; }
+    .feed-title-sm { font-family: 'Libre Bodoni', serif; font-size: 16px; font-weight: 400; color: var(--nearblack); line-height: 1.35; margin-bottom: 6px; }
+    .feed-date { font-size: 11px; color: var(--gray); }
+
+    /* ════════════════════════════════════
+       SCREEN 7 — MEMBERS
+    ════════════════════════════════════ */
+    .members-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+    .m-card { background: white; border: 1px solid var(--lightgray); padding: 24px 18px; text-align: center; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
+    .m-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+    .m-avatar { width: 60px; height: 60px; border-radius: 50%; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-family: 'Libre Bodoni', serif; font-style: italic; font-size: 22px; color: white; }
+    .m-name { font-size: 14px; font-weight: 600; color: var(--nearblack); margin-bottom: 3px; }
+    .m-location { font-size: 11px; color: var(--gray); margin-bottom: 10px; }
+    .m-tags { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; margin-bottom: 12px; min-height: 22px; }
+    .m-bench { font-size: 11px; color: var(--gray); border-top: 1px solid var(--lightgray); padding-top: 10px; }
+    .m-bench strong { color: var(--nearblack); }
+
+    /* ════════════════════════════════════
+       SCREEN 8 — ADMIN
+    ════════════════════════════════════ */
+    .admin-wrap { display: grid; grid-template-columns: 210px 1fr; min-height: calc(100vh - 101px); }
+    .admin-side { background: var(--nearblack); padding: 32px 0; }
+    .admin-logo { font-family: 'Libre Bodoni', serif; font-style: italic; font-size: 18px; color: white; padding: 0 24px 8px; }
+    .admin-logo-sub { font-family: inherit; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--salmon); font-style: normal; padding: 0 24px 28px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 8px; display: block; }
+    .admin-nav { padding-top: 0; }
+    .a-nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 24px; font-size: 13px; color: rgba(255,255,255,0.55); cursor: pointer; transition: all 0.15s; }
+    .a-nav-item:hover { color: white; background: rgba(255,255,255,0.06); }
+    .a-nav-item.active { color: white; background: rgba(255,255,255,0.1); }
+    .a-badge { margin-left: auto; background: var(--salmon); color: var(--nearblack); font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 10px; }
+    .admin-main { padding: 40px 44px; }
+    .admin-title { font-family: 'Libre Bodoni', serif; font-size: 28px; font-weight: 400; color: var(--nearblack); margin-bottom: 4px; }
+    .admin-sub { font-size: 13px; color: var(--gray); margin-bottom: 36px; }
+    .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 36px; }
+    .stat { background: white; border: 1px solid var(--lightgray); padding: 20px 22px; }
+    .stat-lbl { font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray); margin-bottom: 8px; }
+    .stat-num { font-family: 'Libre Bodoni', serif; font-size: 36px; color: var(--nearblack); line-height: 1; }
+    .stat-note { font-size: 11px; color: var(--salmon); margin-top: 4px; font-weight: 600; }
+
+    .queue { background: white; border: 1px solid var(--lightgray); border-radius: 2px; overflow: hidden; }
+    .queue-hdr { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid var(--lightgray); }
+    .queue-hdr-title { font-size: 13px; font-weight: 700; color: var(--nearblack); }
+    table { width: 100%; border-collapse: collapse; }
+    th { padding: 10px 16px; font-size: 9px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--gray); border-bottom: 1px solid var(--lightgray); text-align: left; background: #F8F6F2; }
+    td { padding: 14px 16px; border-bottom: 1px solid var(--lightgray); font-size: 13px; vertical-align: middle; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #FDFCFA; }
+    .q-thumb { width: 60px; height: 38px; border-radius: 2px; display: inline-flex; align-items: center; justify-content: center; font-size: 16px; }
+    .q-title { font-weight: 600; color: var(--nearblack); margin-bottom: 3px; font-size: 13px; }
+    .q-url { font-size: 11px; color: var(--gray); }
+    .q-actions { display: flex; gap: 8px; align-items: center; }
+    .btn-approve { padding: 5px 13px; background: var(--nearblack); color: white; font-size: 10px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; border: none; border-radius: 2px; cursor: pointer; font-family: inherit; }
+    .btn-reject { padding: 5px 13px; background: transparent; color: var(--gray); font-size: 10px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; border: 1.5px solid var(--lightgray); border-radius: 2px; cursor: pointer; font-family: inherit; }
+    .btn-reject:hover { border-color: var(--red); color: var(--red); }
+    .toggle-wrap { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--gray); cursor: pointer; }
+    .toggle { width: 30px; height: 17px; border-radius: 9px; background: var(--lightgray); position: relative; }
+    .toggle.on { background: var(--salmon); }
+    .toggle::after { content: ''; position: absolute; width: 13px; height: 13px; border-radius: 50%; background: white; top: 2px; left: 2px; transition: transform 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+    .toggle.on::after { transform: translateX(13px); }
+    .badge-status { display: inline-block; padding: 3px 9px; border-radius: 2px; font-size: 9px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
+    .badge-draft { background: #FFF3E0; color: #E65100; }
+    .badge-pending { background: var(--lavender); color: #4a4e8a; }
+  </style>
+</head>
+<body>
+
+<!-- ══ SWITCHER ══ -->
+<div id="switcher">
+  <span class="label">Solmae</span>
+  <button class="active" onclick="show('landing',this)">1 · Landing</button>
+  <button onclick="show('invite',this)">2 · Invite Gate</button>
+  <button onclick="show('apology',this)">2b · Apology Modal</button>
+  <button onclick="show('onboard-1',this)">3a · Onboard: Role</button>
+  <button onclick="show('onboard-2',this)">3b · Onboard: Auth</button>
+  <button onclick="show('onboard-3',this)">3c · Onboard: Profile</button>
+  <button onclick="show('edition',this)">4 · The Edition</button>
+  <button onclick="show('creators',this)">5 · Creators</button>
+  <button onclick="show('creator-profile',this)">6 · Creator Profile</button>
+  <button onclick="show('members',this)">7 · Members</button>
+  <button onclick="show('admin',this)">8 · Admin</button>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SCREEN 1 — LANDING
+══════════════════════════════════════════ -->
+<div id="screen-landing" class="screen active">
+  <nav class="nav-pub">
+    <div class="nav-pub-logo">Solmae</div>
+    <div class="nav-pub-right">
+      <button class="btn btn-outline btn-sm" onclick="show('invite', document.querySelector('[onclick*=invite]'))">Enter Invite Code</button>
+      <button class="btn btn-dark btn-sm" onclick="show('onboard-1', document.querySelector('[onclick*=onboard-1]'))">Apply as Creator</button>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-bg-s">S</div>
+    <div class="hero-eyebrow">Invite Only · Women in Leadership</div>
+    <h1 class="hero-title">Where women who <em>lead</em> come to be inspired.</h1>
+    <p class="hero-sub">A curated community of creators, founders, experts, and makers — sharing what they know, discover, and love.</p>
+    <div class="hero-ctas">
+      <button class="btn btn-salmon" onclick="show('invite', document.querySelector('[onclick*=invite]'))">Enter Your Invite Code</button>
+      <button class="btn btn-ghost" onclick="show('onboard-1', document.querySelector('[onclick*=onboard-1]'))">Apply as a Creator</button>
+    </div>
+  </div>
+
+  <div class="landing-section">
+    <div class="section-eyebrow">Our Creators</div>
+    <h2 class="section-title">The voices behind Solmae</h2>
+    <p class="section-sub">Writers, founders, doctors, designers, and makers — hand-selected by Jen and Lauren.</p>
+    <div class="pub-creators-grid">
+      <div class="pub-creator-card">
+        <div class="pub-avatar"><img src="https://kalejunkie.com/wp-content/uploads/2025/09/main-image.webp" alt="Nicole Keshishian"></div>
+        <div class="pub-creator-name">Nicole Keshishian</div>
+        <div class="pub-creator-tags"><span class="tag tag-sm">Nutrition</span><span class="tag tag-sm">Recipes</span></div>
+      </div>
+      <div class="pub-creator-card">
+        <div class="pub-avatar"><img src="https://shiragill.com/wp-content/uploads/BeccaMeyerMillValley_7036-Edita-scaled.jpg" alt="Shira Gill"></div>
+        <div class="pub-creator-name">Shira Gill</div>
+        <div class="pub-creator-tags"><span class="tag tag-sm">Lifestyle</span><span class="tag tag-sm">Wellness</span></div>
+      </div>
+      <div class="pub-creator-card">
+        <div class="pub-avatar"><img src="https://images.squarespace-cdn.com/content/v1/6303fb9404a0cf0cd130ef3c/f7b9ac1c-b3cb-42e6-aa9d-982f34d5507a/Brit+Morin+Headshot.jpg" alt="Brit Morin"></div>
+        <div class="pub-creator-name">Brit Morin</div>
+        <div class="pub-creator-tags"><span class="tag tag-sm">Entrepreneurship</span></div>
+      </div>
+      <div class="pub-creator-card">
+        <div class="pub-avatar"><img src="https://static1.squarespace.com/static/5b0b65b8f407b4a4414db2ee/5ea6de0a41e9232ab0a8b58d/639fd7597ca60c5b989498a5/1713378056113/Holly+June+20220467.jpg?format=1500w" alt="Holly Blakey"></div>
+        <div class="pub-creator-name">Holly Blakey</div>
+        <div class="pub-creator-tags"><span class="tag tag-sm">Design</span><span class="tag tag-sm">Home</span></div>
+      </div>
+      <div class="pub-creator-card">
+        <div class="pub-avatar" style="background: linear-gradient(135deg, #B5D5F7, #78aadf)">K</div>
+        <div class="pub-creator-name">Kate Ogata</div>
+        <div class="pub-creator-tags"><span class="tag tag-sm">Fitness</span></div>
+      </div>
+      <div class="pub-creator-card">
+        <div class="pub-avatar"><img src="https://geniusmomhacks.com/wp-content/uploads/2023/11/Amy-Motroni.jpg" alt="Amy Motroni"></div>
+        <div class="pub-creator-name">Amy Motroni</div>
+        <div class="pub-creator-tags"><span class="tag tag-sm">Parenthood</span><span class="tag tag-sm">Wellness</span></div>
+      </div>
+      <div class="pub-creator-card">
+        <div class="pub-avatar" style="background: linear-gradient(135deg, #C4B5E0, #9080c0)">C</div>
+        <div class="pub-creator-name">Caitlin Flemming</div>
+        <div class="pub-creator-tags"><span class="tag tag-sm">Design</span><span class="tag tag-sm">Interior</span></div>
+      </div>
+      <div class="pub-creator-card">
+        <div class="pub-avatar"><img src="https://9to5chic.com/wp-content/uploads/2016/10/DSC_0332-copy-3.jpg" alt="Anh Sundstrom"></div>
+        <div class="pub-creator-name">Anh Sundstrom</div>
+        <div class="pub-creator-tags"><span class="tag tag-sm">Fashion</span><span class="tag tag-sm">Lifestyle</span></div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="landing-divider">
+
+  <div class="landing-about">
+    <div>
+      <h2 class="about-title">Built for women who <em>do the work.</em></h2>
+      <p class="about-text">Solmae is an invite-only space where the content finds you — curated daily from the creators you trust, in the topics that matter to you. No algorithm. No noise. Just signal.</p>
+      <button class="btn btn-salmon">Enter Your Invite Code</button>
+    </div>
+    <div class="about-right">
+      <div class="about-stat"><div class="about-stat-num">50+</div><div class="about-stat-label">Founding Creators across nutrition, design, fitness & more</div></div>
+      <div class="about-stat"><div class="about-stat-num">3</div><div class="about-stat-label">Curated stories in every daily Edition, chosen from your Bench</div></div>
+      <div class="about-stat"><div class="about-stat-num">5</div><div class="about-stat-label">Invite slots available per Member each month</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SCREEN 2 — INVITE GATE
+══════════════════════════════════════════ -->
+<div id="screen-invite" class="screen">
+  <nav class="nav-pub">
+    <div class="nav-pub-logo">Solmae</div>
+  </nav>
+  <div class="invite-wrap">
+    <div class="invite-body">
+      <div class="invite-box">
+        <div class="invite-s">S</div>
+        <h1 class="invite-title">You've been invited.</h1>
+        <p class="invite-sub">Enter the invite code shared with you to join Solmae's community of creators, founders, and leaders.</p>
+        <input class="code-input" placeholder="ENTER CODE" maxlength="10">
+        <button class="btn btn-dark" style="width:100%; padding: 13px;">Continue</button>
+        <div class="divider-or">
+          <div class="divider-line"></div>
+          <div class="divider-text">or</div>
+          <div class="divider-line"></div>
+        </div>
+        <p class="invite-footnote">Are you a creator? <a onclick="show('onboard-1', document.querySelector('[onclick*=onboard-1]'))">Apply to join Solmae →</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SCREEN 2b — APOLOGY MODAL
+══════════════════════════════════════════ -->
+<div id="screen-apology" class="screen">
+  <nav class="nav-pub"><div class="nav-pub-logo">Solmae</div></nav>
+  <div class="invite-wrap" style="filter: blur(3px); pointer-events: none;">
+    <div class="invite-body">
+      <div class="invite-box">
+        <div class="invite-s">S</div>
+        <h1 class="invite-title">You've been invited.</h1>
+        <input class="code-input" value="SARAH5">
+      </div>
+    </div>
+  </div>
+  <div class="modal-overlay" style="position:absolute; top:41px;">
+    <div class="modal">
+      <div class="modal-s">S</div>
+      <h2>This month's spots are full.</h2>
+      <p>Sarah's invites for March are taken — but a new batch opens April 1st. Leave your email and we'll send you a personal reminder the moment a spot opens.</p>
+      <input class="modal-input" placeholder="Your email address">
+      <button class="btn btn-dark" style="width:100%; padding:12px;">Remind me April 1st</button>
+      <p class="modal-note">You'll only hear from us when your spot opens. No newsletters, no noise.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SCREEN 3a — ONBOARD: ROLE SELECTION
+══════════════════════════════════════════ -->
+<div id="screen-onboard-1" class="screen">
+  <div class="onboard-wrap">
+    <div class="onboard-header"><div class="onboard-logo">Solmae</div></div>
+    <div class="onboard-body">
+      <div class="step-list">
+        <div class="step-row">
+          <div class="step-connector"><div class="step-dot active">1</div><div class="step-vline"></div></div>
+          <div class="step-info"><div class="step-label">Your role</div><div class="step-desc">Member or Creator?</div></div>
+        </div>
+        <div class="step-row">
+          <div class="step-connector"><div class="step-dot">2</div><div class="step-vline"></div></div>
+          <div class="step-info"><div class="step-label dim">Sign in</div><div class="step-desc">Google or Facebook</div></div>
+        </div>
+        <div class="step-row">
+          <div class="step-connector"><div class="step-dot">3</div><div class="step-vline"></div></div>
+          <div class="step-info"><div class="step-label dim">Your profile</div><div class="step-desc">Bio, handles, topics</div></div>
+        </div>
+        <div class="step-row">
+          <div class="step-connector"><div class="step-dot">4</div></div>
+          <div class="step-info"><div class="step-label dim">You're in</div></div>
+        </div>
+      </div>
+      <div class="onboard-content">
+        <h2 class="onboard-title">How are you joining?</h2>
+        <p class="onboard-sub">Choose your role — you can only be one, and it shapes how you experience Solmae.</p>
+        <div class="role-cards">
+          <div class="role-card selected" onclick="toggleRole(this)">
+            <div class="role-radio"></div>
+            <div class="role-title">Member</div>
+            <div class="role-desc">Browse the daily Edition, follow the Creators you love, and connect with other Members.</div>
+          </div>
+          <div class="role-card" onclick="toggleRole(this)">
+            <div class="role-radio"></div>
+            <div class="role-title">Creator</div>
+            <div class="role-desc">Share your work with Solmae's community. Your content surfaces in Members' daily Editions.</div>
+          </div>
+        </div>
+        <button class="btn btn-dark" onclick="show('onboard-2', document.querySelector('[onclick*=onboard-2]'))">Continue →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SCREEN 3b — ONBOARD: OAUTH
+══════════════════════════════════════════ -->
+<div id="screen-onboard-2" class="screen">
+  <div class="onboard-wrap">
+    <div class="onboard-header"><div class="onboard-logo">Solmae</div></div>
+    <div class="onboard-body">
+      <div class="step-list">
+        <div class="step-row">
+          <div class="step-connector"><div class="step-dot done">✓</div><div class="step-vline done"></div></div>
+          <div class="step-info"><div class="step-label">Your role</div><div class="step-desc">Member</div></div>
+        </div>
+        <div class="step-row">
+          <div class="step-connector"><div class="step-dot active">2</div><div class="step-vline"></div></div>
+          <div class="step-info"><div class="step-label">Sign in</div><div class="step-desc">Google or Facebook</div></div>
+        </div>
+        <div class="step-row">
+          <div class="step-connector"><div class="step-dot">3</div><div class="step-vline"></div></div>
+          <div class="step-info"><div class="step-label dim">Your profile</div></div>
+        </div>
+        <div class="step-row">
+          <div class="step-connector"><div class="step-dot">4</div></div>
+          <div class="step-info"><div class="step-label dim">You're in</div></div>
+        </div>
+      </div>
+      <div class="onboard-content">
+        <h2 class="onboard-title">Sign in to continue.</h2>
+        <p class="onboard-sub">We'll pull your name and photo automatically — nothing else without your permission.</p>
+        <div class="oauth-btns">
+          <button class="oauth-btn" onclick="show('onboard-3', document.querySelector('[onclick*=onboard-3]'))">
+            <div class="oauth-icon" style="background:#EA4335">G</div>
+            Continue with Google
+          </button>
+          <button class="oauth-btn" onclick="show('onboard-3', document.querySelector('[onclick*=onboard-3]'))">
+            <div class="oauth-icon" style="background:#1877F2">f</div>
+            Continue with Facebook
+          </button>
+        </div>
+        <p style="font-size:12px; color:var(--gray); line-height:1.7;">By signing in you agree to Solmae's <a style="color:var(--nearblack); font-weight:600;">Terms</a> and <a style="color:var(--nearblack); font-weight:600;">Privacy Policy</a>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SCREEN 3c — ONBOARD: PROFILE SETUP
+══════════════════════════════════════════ -->
+<div id="screen-onboard-3" class="screen">
+  <div class="onboard-wrap">
+    <div class="onboard-header"><div class="onboard-logo">Solmae</div></div>
+    <div class="onboard-body">
+      <div class="step-list">
+        <div class="step-row">
+          <div class="step-connector"><div class="step-dot done">✓</div><div class="step-vline done"></div></div>
+          <div class="step-info"><div class="step-label">Your role</div><div class="step-desc">Member</div></div>
+        </div>
+        <div class="step-row">
+          <div class="step-connector"><div class="step-dot done">✓</div><div class="step-vline done"></div></div>
+          <div class="step-info"><div class="step-label">Signed in</div><div class="step-desc">via Google</div></div>
+        </div>
+        <div class="step-row">
+          <div class="step-connector"><div class="step-dot active">3</div><div class="step-vline"></div></div>
+          <div class="step-info"><div class="step-label">Your profile</div><div class="step-desc">Bio, handles, topics</div></div>
+        </div>
+        <div class="step-row">
+          <div class="step-connector"><div class="step-dot">4</div></div>
+          <div class="step-info"><div class="step-label dim">You're in</div></div>
+        </div>
+      </div>
+      <div class="onboard-content">
+        <h2 class="onboard-title">Tell us about yourself.</h2>
+        <p class="onboard-sub">This is what other Members see when they visit your profile.</p>
+
+        <div class="form-group">
+          <label class="form-label">Profile Photo</label>
+          <div class="photo-drop">
+            <div class="photo-drop-circle">📷</div>
+            <p><strong>Upload a photo</strong> or drag and drop</p>
+            <p style="margin-top:4px; font-size:12px;">JPG or PNG, up to 5MB</p>
+          </div>
+        </div>
+
+        <div class="form-row" style="margin-bottom:20px;">
+          <div class="form-group" style="margin-bottom:0">
+            <label class="form-label">First Name</label>
+            <input class="form-input" value="Sarah" readonly>
+          </div>
+          <div class="form-group" style="margin-bottom:0">
+            <label class="form-label">Last Name</label>
+            <input class="form-input" value="Chen" readonly>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">A little about you <span class="opt">(bio)</span></label>
+          <textarea class="form-input" rows="3" style="resize:vertical" placeholder="Interior designer, mom to two, endlessly curious about perimenopause + nutrition. Mill Valley."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Location <span class="opt">(optional)</span></label>
+          <input class="form-input" placeholder="e.g. Mill Valley, CA">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Social handles <span class="opt">— at least one required</span></label>
+          <div class="social-grid">
+            <div class="social-row"><div class="social-pre">IG</div><input class="social-in" placeholder="@handle"></div>
+            <div class="social-row"><div class="social-pre">X</div><input class="social-in" placeholder="@handle"></div>
+            <div class="social-row"><div class="social-pre">LI</div><input class="social-in" placeholder="URL or handle"></div>
+            <div class="social-row"><div class="social-pre">TT</div><input class="social-in" placeholder="@handle"></div>
+            <div class="social-row"><div class="social-pre">FB</div><input class="social-in" placeholder="URL or handle"></div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Topics you're into</label>
+          <div class="topics-wrap">
+            <div class="topic-chip on">Nutrition</div>
+            <div class="topic-chip on">Perimenopause</div>
+            <div class="topic-chip">Parenthood</div>
+            <div class="topic-chip on">Design</div>
+            <div class="topic-chip">Fitness</div>
+            <div class="topic-chip">Entrepreneurship</div>
+            <div class="topic-chip">Fashion</div>
+            <div class="topic-chip">Lifestyle</div>
+            <div class="topic-chip">Travel</div>
+            <div class="topic-chip">Wellness</div>
+            <div class="topic-chip">Finance</div>
+            <div class="topic-chip">Real Estate</div>
+            <div class="topic-chip">Food</div>
+            <div class="topic-chip">Beauty</div>
+          </div>
+        </div>
+
+        <button class="btn btn-dark" style="margin-top:8px;">Complete My Profile →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SCREEN 4 — THE EDITION
+══════════════════════════════════════════ -->
+<div id="screen-edition" class="screen">
+  <nav class="nav">
+    <div class="nav-logo">Solmae</div>
+    <div class="nav-links">
+      <a class="nav-link active">Edition</a>
+      <a class="nav-link" onclick="show('creators', document.querySelector('[onclick*=creators\']'))">Creators</a>
+      <a class="nav-link" onclick="show('members', document.querySelector('[onclick*=members\']'))">Members</a>
+    </div>
+    <div class="nav-right">
+      <div class="nav-avatar">S</div>
+    </div>
+  </nav>
+
+  <div class="edition-hdr">
+    <div>
+      <div class="edition-eyebrow">Your Daily Edition</div>
+      <div class="edition-masthead">The Edition</div>
+    </div>
+    <div class="edition-meta">
+      <div class="edition-date">Wednesday, March 25, 2026</div>
+      <div class="edition-count">3 stories from your Bench</div>
+    </div>
+  </div>
+
+  <div class="edition-grid">
+    <!-- Hero story -->
+    <div class="e-card e-card-hero">
+      <div class="e-thumb e-thumb-hero"><img src="https://kalejunkie.com/wp-content/uploads/2026/03/KJ-Viral-Cadbury-Egg-Protein-Balls-6-scaled.jpg" alt="Viral Cadbury Egg Protein Balls"></div>
+      <div class="e-byline">Nicole Keshishian <span class="e-byline-dot"></span> Nutrition</div>
+      <div class="e-title">Viral Cadbury Egg Protein Balls</div>
+      <div class="e-desc">These no-bake protein balls taste exactly like Cadbury Eggs — and they're actually good for you. Nicole's latest recipe has taken over the internet, and for good reason. Just 6 ingredients, 15 minutes, no oven.</div>
+      <div class="e-actions">
+        <div class="e-action liked"><span class="e-action-icon">♥</span> 48</div>
+        <div class="e-action"><span class="e-action-icon">💬</span> 12</div>
+        <div class="e-action"><span class="e-action-icon">↗</span> Share</div>
+        <a class="e-read" href="https://kalejunkie.com/viral-cadbury-egg-protein-balls/" target="_blank">Read on Kalejunkie →</a>
+      </div>
+    </div>
+
+    <!-- Story 2 -->
+    <div class="e-card">
+      <div class="e-thumb e-thumb-sm" style="background: linear-gradient(135deg, #CCCEEF 0%, #a8abdc 100%); display:flex; align-items:center; justify-content:center; font-size:36px;">🏡</div>
+      <div class="e-byline">Shira Gill <span class="e-byline-dot"></span> Lifestyle · Wellness</div>
+      <div class="e-title-sm">My Favorite Minimalist Makeup and Skincare Essentials</div>
+      <div class="e-actions">
+        <div class="e-action"><span class="e-action-icon">♥</span> 31</div>
+        <div class="e-action"><span class="e-action-icon">💬</span> 7</div>
+        <div class="e-action"><span class="e-action-icon">↗</span></div>
+        <a class="e-read" href="https://shiragill.com/my-favorite-minimalist-makeup-and-skincare-essentials/" target="_blank">Read →</a>
+      </div>
+    </div>
+
+    <!-- Story 3 -->
+    <div class="e-card">
+      <div class="e-thumb e-thumb-sm" style="background: linear-gradient(135deg, #F7D4A8 0%, #d89848 100%); display:flex; align-items:center; justify-content:center; font-size:36px;">📅</div>
+      <div class="e-byline">Amy Motroni <span class="e-byline-dot"></span> Parenthood · Wellness</div>
+      <div class="e-title-sm">Set Your Week Up For Success With a Sunday Reset Routine</div>
+      <div class="e-actions">
+        <div class="e-action"><span class="e-action-icon">♥</span> 19</div>
+        <div class="e-action"><span class="e-action-icon">💬</span> 4</div>
+        <div class="e-action"><span class="e-action-icon">↗</span></div>
+        <a class="e-read" href="https://geniusmomhacks.com/sunday-reset-routine/" target="_blank">Read →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SCREEN 5 — CREATORS GRID
+══════════════════════════════════════════ -->
+<div id="screen-creators" class="screen">
+  <nav class="nav">
+    <div class="nav-logo">Solmae</div>
+    <div class="nav-links">
+      <a class="nav-link" onclick="show('edition',document.querySelector('[onclick*=edition]'))">Edition</a>
+      <a class="nav-link active">Creators</a>
+      <a class="nav-link" onclick="show('members',document.querySelector('[onclick*=members]'))">Members</a>
+    </div>
+    <div class="nav-right"><div class="nav-avatar">S</div></div>
+  </nav>
+  <div class="page">
+    <div style="margin-bottom:32px;">
+      <h1 style="font-family:'Libre Bodoni',serif; font-size:36px; font-weight:400; letter-spacing:-0.5px; margin-bottom:6px;">Creators</h1>
+      <p style="font-size:14px; color:var(--gray);">Follow Creators to build your Bench — they shape your daily Edition.</p>
+    </div>
+    <div class="filter-bar">
+      <input class="search" placeholder="Search by name…">
+      <div class="filter-chip active">All</div>
+      <div class="filter-chip">Nutrition</div>
+      <div class="filter-chip">Fitness</div>
+      <div class="filter-chip">Design</div>
+      <div class="filter-chip">Entrepreneurship</div>
+      <div class="filter-chip">Lifestyle</div>
+      <div class="filter-chip">Fashion</div>
+      <div class="filter-chip">Wellness</div>
+    </div>
+    <div class="creators-grid">
+      <!-- Card 1 -->
+      <div class="c-card" onclick="show('creator-profile',document.querySelector('[onclick*=creator-profile]'))">
+        <div class="c-photo"><img src="https://kalejunkie.com/wp-content/uploads/2025/09/main-image.webp" alt="Nicole Keshishian"></div>
+        <div class="c-body">
+          <div class="c-name">Nicole Keshishian</div>
+          <div class="c-handle">@kalejunkie · 2.8M</div>
+          <div class="c-tags"><span class="tag">Nutrition</span><span class="tag">Recipes</span></div>
+        </div>
+        <div class="c-footer">
+          <span style="font-size:11px;color:var(--gray)">12 posts</span>
+          <button class="btn-follow following">Following</button>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="c-card">
+        <div class="c-photo"><img src="https://shiragill.com/wp-content/uploads/BeccaMeyerMillValley_7036-Edita-scaled.jpg" alt="Shira Gill"></div>
+        <div class="c-body">
+          <div class="c-name">Shira Gill</div>
+          <div class="c-handle">@shiragill · 110K</div>
+          <div class="c-tags"><span class="tag">Lifestyle</span><span class="tag">Wellness</span></div>
+        </div>
+        <div class="c-footer">
+          <span style="font-size:11px;color:var(--gray)">8 posts</span>
+          <button class="btn-follow following">Following</button>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="c-card">
+        <div class="c-photo"><img src="https://images.squarespace-cdn.com/content/v1/6303fb9404a0cf0cd130ef3c/f7b9ac1c-b3cb-42e6-aa9d-982f34d5507a/Brit+Morin+Headshot.jpg" alt="Brit Morin"></div>
+        <div class="c-body">
+          <div class="c-name">Brit Morin</div>
+          <div class="c-handle">@brit · 64.2K</div>
+          <div class="c-tags"><span class="tag">Entrepreneurship</span><span class="tag">Founder</span></div>
+        </div>
+        <div class="c-footer">
+          <span style="font-size:11px;color:var(--gray)">5 posts</span>
+          <button class="btn-follow">Follow</button>
+        </div>
+      </div>
+      <!-- Card 4 -->
+      <div class="c-card">
+        <div class="c-photo"><img src="https://static1.squarespace.com/static/5b0b65b8f407b4a4414db2ee/5ea6de0a41e9232ab0a8b58d/639fd7597ca60c5b989498a5/1713378056113/Holly+June+20220467.jpg?format=1500w" alt="Holly Blakey"></div>
+        <div class="c-body">
+          <div class="c-name">Holly Blakely</div>
+          <div class="c-handle">@breathing.room.home · 329K</div>
+          <div class="c-tags"><span class="tag">Design</span><span class="tag">Home</span></div>
+        </div>
+        <div class="c-footer">
+          <span style="font-size:11px;color:var(--gray)">9 posts</span>
+          <button class="btn-follow">Follow</button>
+        </div>
+      </div>
+      <!-- Card 5 -->
+      <div class="c-card">
+        <div class="c-photo" style="background:linear-gradient(135deg,#B5D5F7,#6098d8)">K</div>
+        <div class="c-body">
+          <div class="c-name">Kate Ogata</div>
+          <div class="c-handle">@katieogata · 122K</div>
+          <div class="c-tags"><span class="tag">Fitness</span><span class="tag">Wellness</span></div>
+        </div>
+        <div class="c-footer">
+          <span style="font-size:11px;color:var(--gray)">7 posts</span>
+          <button class="btn-follow following">Following</button>
+        </div>
+      </div>
+      <!-- Card 6 -->
+      <div class="c-card">
+        <div class="c-photo"><img src="https://geniusmomhacks.com/wp-content/uploads/2023/11/Amy-Motroni.jpg" alt="Amy Motroni"></div>
+        <div class="c-body">
+          <div class="c-name">Amy Motroni</div>
+          <div class="c-handle">@geniusmomhacks · 339K</div>
+          <div class="c-tags"><span class="tag">Parenthood</span><span class="tag">Wellness</span></div>
+        </div>
+        <div class="c-footer">
+          <span style="font-size:11px;color:var(--gray)">6 posts</span>
+          <button class="btn-follow">Follow</button>
+        </div>
+      </div>
+      <!-- Card 7 -->
+      <div class="c-card">
+        <div class="c-photo" style="background:linear-gradient(135deg,#C4B5E0,#8870c0)">C</div>
+        <div class="c-body">
+          <div class="c-name">Caitlin Flemming</div>
+          <div class="c-handle">@caitlinflemming · 79.3K</div>
+          <div class="c-tags"><span class="tag">Design</span><span class="tag">Interior</span></div>
+        </div>
+        <div class="c-footer">
+          <span style="font-size:11px;color:var(--gray)">4 posts</span>
+          <button class="btn-follow">Follow</button>
+        </div>
+      </div>
+      <!-- Card 8 -->
+      <div class="c-card">
+        <div class="c-photo"><img src="https://9to5chic.com/wp-content/uploads/2016/10/DSC_0332-copy-3.jpg" alt="Anh Sundstrom"></div>
+        <div class="c-body">
+          <div class="c-name">Anh Sundstrom</div>
+          <div class="c-handle">@9to5chic · 381K</div>
+          <div class="c-tags"><span class="tag">Fashion</span><span class="tag">Lifestyle</span></div>
+        </div>
+        <div class="c-footer">
+          <span style="font-size:11px;color:var(--gray)">11 posts</span>
+          <button class="btn-follow">Follow</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SCREEN 6 — CREATOR PROFILE
+══════════════════════════════════════════ -->
+<div id="screen-creator-profile" class="screen">
+  <nav class="nav">
+    <div class="nav-logo">Solmae</div>
+    <div class="nav-links">
+      <a class="nav-link" onclick="show('edition',document.querySelector('[onclick*=edition]'))">Edition</a>
+      <a class="nav-link active" onclick="show('creators',document.querySelector('[onclick*=creators]'))">Creators</a>
+      <a class="nav-link" onclick="show('members',document.querySelector('[onclick*=members]'))">Members</a>
+    </div>
+    <div class="nav-right"><div class="nav-avatar">S</div></div>
+  </nav>
+
+  <div class="cp-header">
+    <div class="cp-inner">
+      <div class="cp-avatar"><img src="https://kalejunkie.com/wp-content/uploads/2025/09/main-image.webp" alt="Nicole Keshishian"></div>
+      <div class="cp-info">
+        <div class="cp-name">Nicole Keshishian</div>
+        <div class="cp-handle">@kalejunkie</div>
+        <div class="cp-bio">Nourishing recipes for real life. Food that loves you back. Author of The Kalejunkie Cookbook. Based in Corte Madera, CA.</div>
+        <div class="cp-socials">
+          <div class="cp-social">IG @kalejunkie</div>
+          <div class="cp-social">kalejunkie.com</div>
+          <div class="cp-social">Substack</div>
+        </div>
+        <div style="margin-top:16px;"><span class="tag">Nutrition</span> <span class="tag">Recipes</span> <span class="tag">Wellness</span></div>
+      </div>
+      <div class="cp-right">
+        <div class="cp-stat"><div class="cp-stat-num">2.8M</div><div class="cp-stat-label">Instagram followers</div></div>
+        <button class="btn-follow following" style="font-size:11px; padding:8px 20px;">Following</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="cp-feed">
+    <div class="feed-header">
+      <div class="feed-title">Nicole's Content on Solmae</div>
+      <div style="font-size:13px;color:var(--gray);">12 posts</div>
+    </div>
+    <div class="feed-grid">
+      <div class="feed-card">
+        <div class="feed-thumb"><img src="https://kalejunkie.com/wp-content/uploads/2026/03/KJ-Viral-Cadbury-Egg-Protein-Balls-6-scaled.jpg" alt="Viral Cadbury Egg Protein Balls"></div>
+        <div class="feed-body">
+          <div class="feed-type">Recipe · Repost</div>
+          <div class="feed-title-sm">Viral Cadbury Egg Protein Balls</div>
+          <div class="feed-date">March 22, 2026</div>
+        </div>
+      </div>
+      <div class="feed-card">
+        <div class="feed-thumb" style="background:linear-gradient(135deg,#f7c5b0,#e89068); display:flex; align-items:center; justify-content:center; font-size:28px;">🌿</div>
+        <div class="feed-body">
+          <div class="feed-type">Recipe · Repost</div>
+          <div class="feed-title-sm">My Hormone-Balancing Green Goddess Bowl (15 minutes)</div>
+          <div class="feed-date">March 18, 2026</div>
+        </div>
+      </div>
+      <div class="feed-card">
+        <div class="feed-thumb" style="background:linear-gradient(135deg,#d4f0d4,#80c080); display:flex; align-items:center; justify-content:center; font-size:28px;">📹</div>
+        <div class="feed-body">
+          <div class="feed-type">Video · Exclusive</div>
+          <div class="feed-title-sm">Meal Prep for Perimenopause: A Solmae Exclusive with Nicole</div>
+          <div class="feed-date">March 12, 2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SCREEN 7 — MEMBERS
+══════════════════════════════════════════ -->
+<div id="screen-members" class="screen">
+  <nav class="nav">
+    <div class="nav-logo">Solmae</div>
+    <div class="nav-links">
+      <a class="nav-link" onclick="show('edition',document.querySelector('[onclick*=edition]'))">Edition</a>
+      <a class="nav-link" onclick="show('creators',document.querySelector('[onclick*=creators]'))">Creators</a>
+      <a class="nav-link active">Members</a>
+    </div>
+    <div class="nav-right"><div class="nav-avatar">S</div></div>
+  </nav>
+  <div class="page">
+    <div style="margin-bottom:32px;">
+      <h1 style="font-family:'Libre Bodoni',serif; font-size:36px; font-weight:400; letter-spacing:-0.5px; margin-bottom:6px;">Members</h1>
+      <p style="font-size:14px; color:var(--gray);">Browse the community. Click any Member to see their Bench.</p>
+    </div>
+    <div class="filter-bar">
+      <input class="search" placeholder="Search by name…">
+      <div class="filter-chip active">All</div>
+      <div class="filter-chip">Nutrition</div>
+      <div class="filter-chip">Design</div>
+      <div class="filter-chip">Fitness</div>
+      <div class="filter-chip">Perimenopause</div>
+      <div class="filter-chip">Entrepreneurship</div>
+    </div>
+    <div class="members-grid">
+      <div class="m-card">
+        <div class="m-avatar" style="background:linear-gradient(135deg,#CCCEEF,#9095d0)">J</div>
+        <div class="m-name">Jennifer L.</div><div class="m-location">Mill Valley, CA</div>
+        <div class="m-tags"><span class="tag tag-sm">Design</span><span class="tag tag-sm">Wellness</span></div>
+        <div class="m-bench">Bench: <strong>7 creators</strong></div>
+      </div>
+      <div class="m-card">
+        <div class="m-avatar" style="background:linear-gradient(135deg,#FE9D94,#e07868)">S</div>
+        <div class="m-name">Sarah C.</div><div class="m-location">San Francisco, CA</div>
+        <div class="m-tags"><span class="tag tag-sm">Nutrition</span><span class="tag tag-sm">Fitness</span></div>
+        <div class="m-bench">Bench: <strong>12 creators</strong></div>
+      </div>
+      <div class="m-card">
+        <div class="m-avatar" style="background:linear-gradient(135deg,#84B59F,#4a8068)">M</div>
+        <div class="m-name">Maria B.</div><div class="m-location">Marin, CA</div>
+        <div class="m-tags"><span class="tag tag-sm">Perimenopause</span></div>
+        <div class="m-bench">Bench: <strong>4 creators</strong></div>
+      </div>
+      <div class="m-card">
+        <div class="m-avatar" style="background:linear-gradient(135deg,#F7D4A8,#d89848)">R</div>
+        <div class="m-name">Rachel T.</div><div class="m-location">Tiburon, CA</div>
+        <div class="m-tags"><span class="tag tag-sm">Entrepreneurship</span><span class="tag tag-sm">Finance</span></div>
+        <div class="m-bench">Bench: <strong>9 creators</strong></div>
+      </div>
+      <div class="m-card">
+        <div class="m-avatar" style="background:linear-gradient(135deg,#C4B5E0,#8870c0)">L</div>
+        <div class="m-name">Lauren K.</div><div class="m-location">Ross, CA</div>
+        <div class="m-tags"><span class="tag tag-sm">Fashion</span><span class="tag tag-sm">Lifestyle</span></div>
+        <div class="m-bench">Bench: <strong>6 creators</strong></div>
+      </div>
+      <div class="m-card">
+        <div class="m-avatar" style="background:linear-gradient(135deg,#F5C0B8,#d07870)">A</div>
+        <div class="m-name">Amanda W.</div><div class="m-location">San Anselmo, CA</div>
+        <div class="m-tags"><span class="tag tag-sm">Nutrition</span><span class="tag tag-sm">Wellness</span></div>
+        <div class="m-bench">Bench: <strong>11 creators</strong></div>
+      </div>
+      <div class="m-card">
+        <div class="m-avatar" style="background:linear-gradient(135deg,#B5D5F7,#6098d8)">K</div>
+        <div class="m-name">Katherine M.</div><div class="m-location">Mill Valley, CA</div>
+        <div class="m-tags"><span class="tag tag-sm">Parenthood</span><span class="tag tag-sm">Design</span></div>
+        <div class="m-bench">Bench: <strong>8 creators</strong></div>
+      </div>
+      <div class="m-card">
+        <div class="m-avatar" style="background:linear-gradient(135deg,#f0e0b0,#c8a840)">N</div>
+        <div class="m-name">Nina P.</div><div class="m-location">Sausalito, CA</div>
+        <div class="m-tags"><span class="tag tag-sm">Fitness</span></div>
+        <div class="m-bench">Bench: <strong>3 creators</strong></div>
+      </div>
+      <div class="m-card">
+        <div class="m-avatar" style="background:linear-gradient(135deg,#d4e8d8,#78a880)">E</div>
+        <div class="m-name">Emily S.</div><div class="m-location">Corte Madera, CA</div>
+        <div class="m-tags"><span class="tag tag-sm">Real Estate</span><span class="tag tag-sm">Lifestyle</span></div>
+        <div class="m-bench">Bench: <strong>5 creators</strong></div>
+      </div>
+      <div class="m-card">
+        <div class="m-avatar" style="background:linear-gradient(135deg,#e8c8e8,#b070b0)">C</div>
+        <div class="m-name">Claire D.</div><div class="m-location">San Francisco, CA</div>
+        <div class="m-tags"><span class="tag tag-sm">Perimenopause</span><span class="tag tag-sm">Wellness</span></div>
+        <div class="m-bench">Bench: <strong>14 creators</strong></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SCREEN 8 — ADMIN
+══════════════════════════════════════════ -->
+<div id="screen-admin" class="screen">
+  <nav class="nav">
+    <div class="nav-logo">Solmae</div>
+    <div class="nav-links"></div>
+    <div class="nav-right">
+      <span style="font-size:11px;font-weight:700;letter-spacing:0.5px;color:var(--salmon);text-transform:uppercase;">Admin</span>
+      <div class="nav-avatar" style="background:linear-gradient(135deg,#FE9D94,#e07060)">J</div>
+    </div>
+  </nav>
+  <div class="admin-wrap">
+    <div class="admin-side">
+      <div class="admin-logo">Solmae</div>
+      <span class="admin-logo-sub">Admin Panel</span>
+      <nav class="admin-nav">
+        <div class="a-nav-item active">📋 Content Queue <span class="a-badge">6</span></div>
+        <div class="a-nav-item">👤 Creators <span class="a-badge">3</span></div>
+        <div class="a-nav-item">👥 Members</div>
+        <div class="a-nav-item">📬 Ingest Log</div>
+        <div class="a-nav-item">⚙️ Settings</div>
+      </nav>
+    </div>
+    <div class="admin-main">
+      <div class="admin-title">Content Queue</div>
+      <div class="admin-sub">Review and publish drafts. Drafts are created automatically when you forward a URL to ingest@solmae.com.</div>
+
+      <div class="stats-row">
+        <div class="stat"><div class="stat-lbl">Pending Drafts</div><div class="stat-num">6</div><div class="stat-note">3 new today</div></div>
+        <div class="stat"><div class="stat-lbl">Published This Month</div><div class="stat-num">24</div></div>
+        <div class="stat"><div class="stat-lbl">Creator Applications</div><div class="stat-num">3</div><div class="stat-note">awaiting review</div></div>
+        <div class="stat"><div class="stat-lbl">Active Members</div><div class="stat-num">41</div></div>
+      </div>
+
+      <div class="queue">
+        <div class="queue-hdr">
+          <div class="queue-hdr-title">Drafts — Awaiting Review</div>
+          <button class="btn btn-outline btn-sm">Ingest Log</button>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th style="width:70px"></th>
+              <th>Story</th>
+              <th>Creator</th>
+              <th>Format</th>
+              <th>Front Page</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><div class="q-thumb"><img src="https://kalejunkie.com/wp-content/uploads/2026/03/KJ-Viral-Cadbury-Egg-Protein-Balls-6-scaled.jpg" alt="Nicole"></div></td>
+              <td>
+                <div class="q-title">Viral Cadbury Egg Protein Balls</div>
+                <div class="q-url">kalejunkie.com · Mar 22</div>
+              </td>
+              <td style="font-weight:600;font-size:13px;">Nicole Keshishian</td>
+              <td><span class="badge-status badge-draft">Article</span></td>
+              <td><div class="toggle-wrap"><div class="toggle on"></div> On</div></td>
+              <td><div class="q-actions"><button class="btn-approve">Publish</button><button class="btn-reject">Reject</button></div></td>
+            </tr>
+            <tr>
+              <td><div class="q-thumb" style="background:linear-gradient(135deg,#CCCEEF,#9095d0); display:flex; align-items:center; justify-content:center; font-size:16px;">🏡</div></td>
+              <td>
+                <div class="q-title">My Favorite Minimalist Makeup and Skincare Essentials</div>
+                <div class="q-url">shiragill.com · Mar 21</div>
+              </td>
+              <td style="font-weight:600;font-size:13px;">Shira Gill</td>
+              <td><span class="badge-status badge-draft">Article</span></td>
+              <td><div class="toggle-wrap"><div class="toggle"></div> Off</div></td>
+              <td><div class="q-actions"><button class="btn-approve">Publish</button><button class="btn-reject">Reject</button></div></td>
+            </tr>
+            <tr>
+              <td><div class="q-thumb" style="background:linear-gradient(135deg,#B5D5F7,#6098d8)">💪</div></td>
+              <td>
+                <div class="q-title">The 20-Minute Protocol I Give Every Client Over 40</div>
+                <div class="q-url">instagram.com/katieogata · Mar 20</div>
+              </td>
+              <td style="font-weight:600;font-size:13px;">Kate Ogata</td>
+              <td><span class="badge-status badge-draft">Social Post</span></td>
+              <td><div class="toggle-wrap"><div class="toggle"></div> Off</div></td>
+              <td><div class="q-actions"><button class="btn-approve">Publish</button><button class="btn-reject">Reject</button></div></td>
+            </tr>
+            <tr>
+              <td><div class="q-thumb" style="background:linear-gradient(135deg,#84B59F,#4a8068)">🎙️</div></td>
+              <td>
+                <div class="q-title">How I Built a $10M Business While Raising Two Kids</div>
+                <div class="q-url">brit.co/podcast · Mar 19</div>
+              </td>
+              <td style="font-weight:600;font-size:13px;"><span style="color:var(--red)">⚠ Unassigned</span></td>
+              <td><span class="badge-status badge-pending">Podcast</span></td>
+              <td><div class="toggle-wrap"><div class="toggle"></div> Off</div></td>
+              <td><div class="q-actions"><button class="btn-approve">Assign + Publish</button><button class="btn-reject">Reject</button></div></td>
+            </tr>
+            <tr>
+              <td><div class="q-thumb" style="background:linear-gradient(135deg,#F7D4A8,#d89848); display:flex; align-items:center; justify-content:center; font-size:16px;">📅</div></td>
+              <td>
+                <div class="q-title">Set Your Week Up For Success With a Sunday Reset Routine</div>
+                <div class="q-url">geniusmomhacks.com · Mar 18</div>
+              </td>
+              <td style="font-weight:600;font-size:13px;">Amy Motroni</td>
+              <td><span class="badge-status badge-draft">Article</span></td>
+              <td><div class="toggle-wrap"><div class="toggle"></div> Off</div></td>
+              <td><div class="q-actions"><button class="btn-approve">Publish</button><button class="btn-reject">Reject</button></div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function show(id, btn) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('#switcher button').forEach(b => b.classList.remove('active'));
+    const el = document.getElementById('screen-' + id);
+    if (el) el.classList.add('active');
+    if (btn) btn.classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  function toggleRole(card) {
+    document.querySelectorAll('.role-card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+  }
+
+  document.querySelectorAll('.topic-chip').forEach(chip => {
+    chip.addEventListener('click', () => chip.classList.toggle('on'));
+  });
+
+  document.querySelectorAll('.filter-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      chip.closest('.filter-bar').querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+    });
+  });
+
+  document.querySelectorAll('.btn-follow').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      btn.classList.toggle('following');
+      btn.textContent = btn.classList.contains('following') ? 'Following' : 'Follow';
+    });
+  });
+
+  document.querySelectorAll('.toggle').forEach(t => {
+    t.addEventListener('click', () => t.classList.toggle('on'));
+  });
+</script>
+</body>
+</html>

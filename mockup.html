@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solmae — UX Mockup</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Nunito+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --salmon: #FE9D94;
+      --lavender: #CCCEEF;
+      --red: #FF402E;
+      --off-white: #FAF9F7;
+      --near-black: #1A1A1A;
+      --mid-gray: #8A8A8A;
+      --light-gray: #E8E6E3;
+      --white: #FFFFFF;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Nunito Sans', 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--off-white);
+      color: var(--near-black);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ── Mockup nav bar ─────────────────────────────── */
+    .mockup-nav {
+      background: #111;
+      padding: 10px 32px;
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 9999;
+      border-bottom: 1px solid #222;
+    }
+    .mockup-nav-label {
+      color: #555;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-right: 10px;
+    }
+    .mockup-btn {
+      background: transparent;
+      border: 1px solid #333;
+      color: #777;
+      padding: 5px 14px;
+      font-size: 11px;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      letter-spacing: 0.04em;
+      border-radius: 2px;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .mockup-btn:hover { color: #ccc; border-color: #555; }
+    .mockup-btn.active { background: var(--salmon); border-color: var(--salmon); color: white; }
+
+    /* ── Screens ─────────────────────────────────────── */
+    .screen { display: none; min-height: 100vh; }
+    .screen.active { display: block; }
+
+    /* ── Site nav ─────────────────────────────────────── */
+    .site-nav {
+      background: var(--white);
+      border-bottom: 1px solid var(--light-gray);
+      padding: 0 56px;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 41px;
+      z-index: 100;
+    }
+    .nav-logo {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--near-black);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      user-select: none;
+    }
+    .s-mark { width: 26px; height: 26px; flex-shrink: 0; }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--near-black);
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active-link { color: var(--salmon); }
+
+    /* ── Layout ──────────────────────────────────────── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 56px; }
+
+    /* ── Buttons ─────────────────────────────────────── */
+    .btn-primary {
+      background: var(--salmon);
+      color: white;
+      border: none;
+      padding: 14px 32px;
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--red); }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--near-black);
+      border: 1px solid var(--near-black);
+      padding: 13px 32px;
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-secondary:hover { background: var(--near-black); color: white; }
+
+    .btn-follow {
+      background: transparent;
+      color: var(--salmon);
+      border: 1px solid var(--salmon);
+      padding: 8px 18px;
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+      width: 100%;
+      margin-top: 14px;
+    }
+    .btn-follow:hover, .btn-follow.is-following {
+      background: var(--salmon);
+      color: white;
+    }
+
+    /* ── Chips ───────────────────────────────────────── */
+    .chip {
+      display: inline-block;
+      background: var(--lavender);
+      color: var(--near-black);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 4px 9px;
+      border-radius: 2px;
+    }
+
+    /* ── Footer ──────────────────────────────────────── */
+    .site-footer {
+      background: var(--near-black);
+      color: #666;
+      padding: 44px 56px;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 80px;
+    }
+    .site-footer .footer-logo {
+      font-family: var(--font-serif);
+      font-size: 17px;
+      color: white;
+      letter-spacing: 0.06em;
+    }
+
+    /* ══════════════════════════════════════════════════
+       SCREEN 1 — LANDING
+    ══════════════════════════════════════════════════ */
+    #landing .hero {
+      text-align: center;
+      padding: 100px 56px 72px;
+      border-bottom: 1px solid var(--light-gray);
+    }
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--salmon);
+      margin-bottom: 22px;
+    }
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: 62px;
+      font-weight: 400;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      max-width: 700px;
+      margin: 0 auto 22px;
+    }
+    .hero-title em { font-style: italic; color: var(--salmon); }
+    .hero-body {
+      color: var(--mid-gray);
+      font-size: 16px;
+      max-width: 420px;
+      margin: 0 auto 40px;
+      line-height: 1.75;
+      font-weight: 300;
+    }
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-cta .or { color: var(--light-gray); font-size: 13px; }
+    .text-link {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--near-black);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      cursor: pointer;
+      letter-spacing: 0.03em;
+    }
+    #landing .preview-section { padding: 64px 0; }
+    .preview-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+      margin-bottom: 36px;
+    }
+    #landing .creators-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .creator-card-public {
+      background: var(--white);
+      overflow: hidden;
+    }
+    .creator-card-public .card-img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      background: var(--light-gray);
+      display: block;
+    }
+    .creator-card-public.blurred .card-img {
+      filter: blur(10px);
+      transform: scale(1.08);
+    }
+    .creator-card-public .card-body { padding: 16px 18px 18px; }
+    .creator-card-public .card-name {
+      font-family: var(--font-serif);
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 9px;
+    }
+    .creator-card-public .card-topics { display: flex; gap: 6px; flex-wrap: wrap; }
+    #landing .gate-strip {
+      background: var(--near-black);
+      color: white;
+      text-align: center;
+      padding: 80px 56px;
+    }
+    #landing .gate-strip h2 {
+      font-family: var(--font-serif);
+      font-size: 36px;
+      font-weight: 400;
+      margin-bottom: 14px;
+    }
+    #landing .gate-strip p { color: #888; font-size: 15px; margin-bottom: 32px; line-height: 1.7; }
+
+    /* ══════════════════════════════════════════════════
+       SCREEN 2 — THE EDITION
+    ══════════════════════════════════════════════════ */
+    #edition .edition-header {
+      padding: 52px 0 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-bottom: 1px solid var(--light-gray);
+      margin-bottom: 60px;
+    }
+    .edition-title {
+      font-family: var(--font-serif);
+      font-size: 50px;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+    .edition-meta { color: var(--mid-gray); font-size: 13px; letter-spacing: 0.04em; }
+    .edition-vol {
+      font-family: var(--font-serif);
+      font-size: 13px;
+      color: var(--mid-gray);
+      letter-spacing: 0.06em;
+      font-style: italic;
+    }
+    #edition .stories-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 44px;
+      margin-bottom: 80px;
+    }
+    .story-card .story-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      background: var(--light-gray);
+      display: block;
+      margin-bottom: 22px;
+    }
+    .story-byline {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .byline-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: var(--lavender);
+      flex-shrink: 0;
+    }
+    .byline-name {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+    }
+    .story-tag {
+      display: inline-block;
+      background: var(--lavender);
+      color: var(--near-black);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 2px;
+      margin-bottom: 12px;
+    }
+    .story-title {
+      font-family: var(--font-serif);
+      font-size: 21px;
+      font-weight: 500;
+      line-height: 1.32;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .story-title:hover { color: var(--salmon); }
+    .story-excerpt {
+      font-size: 14px;
+      color: var(--mid-gray);
+      line-height: 1.7;
+      margin-bottom: 20px;
+      font-weight: 300;
+    }
+    .story-actions {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding-top: 18px;
+      border-top: 1px solid var(--light-gray);
+    }
+    .action-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--mid-gray);
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: var(--font-sans);
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+      padding: 0;
+    }
+    .action-btn:hover { color: var(--salmon); }
+    .action-btn.liked { color: var(--salmon); }
+    .read-link {
+      margin-left: auto;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--salmon);
+      cursor: pointer;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .read-link:hover { color: var(--red); }
+
+    /* ══════════════════════════════════════════════════
+       SCREEN 3 — CREATORS GRID
+    ══════════════════════════════════════════════════ */
+    .page-header {
+      padding: 52px 0 36px;
+      border-bottom: 1px solid var(--light-gray);
+      margin-bottom: 44px;
+    }
+    .page-title {
+      font-family: var(--font-serif);
+      font-size: 44px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+    }
+    .page-subtitle { color: var(--mid-gray); font-size: 14px; font-weight: 300; }
+    .filters-row {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    .search-input {
+      border: 1px solid var(--light-gray);
+      background: var(--white);
+      padding: 10px 18px;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      width: 220px;
+      color: var(--near-black);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .search-input::placeholder { color: #bbb; }
+    .search-input:focus { border-color: var(--salmon); }
+    .filter-chip {
+      border: 1px solid var(--light-gray);
+      background: var(--white);
+      padding: 7px 15px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      transition: all 0.15s;
+      color: var(--mid-gray);
+      border-radius: 2px;
+    }
+    .filter-chip:hover { color: var(--near-black); border-color: #ccc; }
+    .filter-chip.active { background: var(--lavender); border-color: var(--lavender); color: var(--near-black); }
+    #creators-screen .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+      margin-bottom: 80px;
+    }
+    .creator-card {
+      background: var(--white);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .creator-card:hover { transform: translateY(-3px); }
+    .creator-card .card-img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      background: var(--light-gray);
+      display: block;
+    }
+    .creator-card .card-body { padding: 18px 18px 20px; }
+    .creator-card .card-name {
+      font-family: var(--font-serif);
+      font-size: 17px;
+      font-weight: 500;
+      margin-bottom: 9px;
+    }
+    .creator-card .card-topics { display: flex; gap: 6px; flex-wrap: wrap; }
+
+    /* ══════════════════════════════════════════════════
+       SCREEN 4 — CREATOR PROFILE
+    ══════════════════════════════════════════════════ */
+    .back-link {
+      display: inline-block;
+      margin: 32px 0 0;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--near-black); }
+    #creator-profile .profile-hero {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 72px;
+      padding: 48px 0 56px;
+      border-bottom: 1px solid var(--light-gray);
+      margin-bottom: 56px;
+    }
+    .profile-photo {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      background: var(--light-gray);
+    }
+    .profile-info { padding: 8px 0; }
+    .profile-name {
+      font-family: var(--font-serif);
+      font-size: 46px;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .profile-topics { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+    .profile-blurb {
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--mid-gray);
+      max-width: 500px;
+      margin-bottom: 28px;
+      font-weight: 300;
+    }
+    .social-row { display: flex; gap: 20px; margin-bottom: 36px; }
+    .social-pill {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+      cursor: pointer;
+      transition: color 0.2s;
+      text-decoration: none;
+    }
+    .social-pill:hover { color: var(--salmon); }
+    .feed-label {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 400;
+      margin-bottom: 32px;
+    }
+    #creator-profile .content-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-bottom: 80px;
+    }
+    .content-card { background: var(--white); overflow: hidden; }
+    .content-card .content-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      background: var(--light-gray);
+      display: block;
+    }
+    .content-card .content-body { padding: 18px; }
+    .content-format {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+      margin-bottom: 8px;
+    }
+    .content-title {
+      font-family: var(--font-serif);
+      font-size: 17px;
+      font-weight: 500;
+      line-height: 1.32;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .content-title:hover { color: var(--salmon); }
+    .content-excerpt { font-size: 13px; color: var(--mid-gray); line-height: 1.65; font-weight: 300; }
+    .exclusive-badge { color: var(--salmon); }
+
+    /* ══════════════════════════════════════════════════
+       SCREEN 5 — MEMBERS GRID
+    ══════════════════════════════════════════════════ */
+    #members-screen .grid-5 {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+      margin-bottom: 80px;
+    }
+    .member-card {
+      text-align: center;
+      padding: 28px 16px 24px;
+      background: var(--white);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .member-card:hover { border-color: var(--lavender); }
+    .member-avatar {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: var(--lavender);
+      display: block;
+      margin: 0 auto 14px;
+    }
+    .member-name {
+      font-family: var(--font-serif);
+      font-size: 15px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+    .member-topics { display: flex; gap: 5px; flex-wrap: wrap; justify-content: center; }
+    .member-topics .chip { font-size: 9px; padding: 3px 7px; }
+
+    /* ══════════════════════════════════════════════════
+       SCREEN 6 — ONBOARDING
+    ══════════════════════════════════════════════════ */
+    #onboarding .onboard-wrap {
+      max-width: 540px;
+      margin: 72px auto 80px;
+      padding: 0 24px;
+    }
+    .step-bar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 52px;
+    }
+    .step-bar-item {
+      flex: 1;
+      height: 3px;
+      background: var(--light-gray);
+      border-radius: 2px;
+      transition: background 0.3s;
+    }
+    .step-bar-item.done { background: var(--near-black); }
+    .step-bar-item.active { background: var(--salmon); }
+    .onboard-step { display: none; }
+    .onboard-step.active { display: block; }
+    .step-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--salmon);
+      margin-bottom: 12px;
+    }
+    .step-title {
+      font-family: var(--font-serif);
+      font-size: 34px;
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .step-subtitle {
+      color: var(--mid-gray);
+      font-size: 15px;
+      line-height: 1.7;
+      margin-bottom: 44px;
+      font-weight: 300;
+    }
+    /* Step 1 — role selector */
+    .role-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 36px; }
+    .role-card {
+      border: 2px solid var(--light-gray);
+      padding: 28px 22px;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: var(--white);
+    }
+    .role-card:hover { border-color: #ddd; }
+    .role-card.selected { border-color: var(--salmon); background: #fff8f7; }
+    .role-icon { font-size: 26px; margin-bottom: 14px; }
+    .role-title { font-family: var(--font-serif); font-size: 20px; font-weight: 500; margin-bottom: 8px; }
+    .role-desc { font-size: 13px; color: var(--mid-gray); line-height: 1.6; font-weight: 300; }
+    /* Step 2 — OAuth */
+    .oauth-stack { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+    .oauth-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 16px 24px;
+      border: 1px solid var(--light-gray);
+      background: var(--white);
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: border-color 0.2s;
+      color: var(--near-black);
+    }
+    .oauth-btn:hover { border-color: #999; }
+    /* Step 3 — Profile form */
+    .form-group { margin-bottom: 26px; }
+    .form-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      margin-bottom: 9px;
+    }
+    .form-label .opt { font-weight: 400; color: var(--mid-gray); text-transform: none; letter-spacing: 0; font-size: 12px; }
+    .form-input, .form-textarea {
+      width: 100%;
+      border: 1px solid var(--light-gray);
+      background: var(--white);
+      padding: 13px 16px;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--near-black);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus, .form-textarea:focus { border-color: var(--salmon); }
+    .form-textarea { resize: vertical; min-height: 96px; }
+    .handles-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .handle-field {
+      display: flex;
+      align-items: stretch;
+      border: 1px solid var(--light-gray);
+      background: var(--white);
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .handle-field:focus-within { border-color: var(--salmon); }
+    .handle-platform {
+      padding: 0 12px;
+      background: var(--off-white);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+      border-right: 1px solid var(--light-gray);
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .handle-field input {
+      flex: 1;
+      border: none;
+      padding: 12px 12px;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--near-black);
+      outline: none;
+      background: transparent;
+      width: 0;
+    }
+    .topics-wrap { display: flex; flex-wrap: wrap; gap: 8px; }
+    .topic-chip {
+      border: 1px solid var(--light-gray);
+      background: var(--white);
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      transition: all 0.15s;
+      color: var(--near-black);
+      letter-spacing: 0.04em;
+      border-radius: 2px;
+    }
+    .topic-chip:hover { border-color: #ccc; }
+    .topic-chip.selected { background: var(--lavender); border-color: var(--lavender); }
+    /* Step 4 — Success */
+    .success-wrap { text-align: center; padding: 16px 0; }
+    .success-circle {
+      width: 72px;
+      height: 72px;
+      background: var(--salmon);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 28px;
+      color: white;
+      font-size: 28px;
+    }
+    .success-cta { display: flex; gap: 12px; justify-content: center; margin-top: 36px; }
+    .back-step {
+      display: block;
+      text-align: center;
+      margin-top: 16px;
+      font-size: 13px;
+      color: var(--mid-gray);
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: var(--font-sans);
+      width: 100%;
+    }
+    .back-step:hover { color: var(--near-black); }
+
+    /* Inline SVG logo path */
+    .s-path { stroke: var(--salmon); stroke-width: 13; stroke-linecap: round; fill: none; }
+  </style>
+</head>
+<body>
+
+<!-- ── Mockup navigator ─────────────────────────── -->
+<div class="mockup-nav">
+  <span class="mockup-nav-label">Screen</span>
+  <button class="mockup-btn active"        onclick="go('landing', this)">/ Landing</button>
+  <button class="mockup-btn"               onclick="go('edition', this)">/home · The Edition</button>
+  <button class="mockup-btn"               onclick="go('creators-screen', this)">/creators · Grid</button>
+  <button class="mockup-btn"               onclick="go('creator-profile', this)">/creators/[id] · Profile</button>
+  <button class="mockup-btn"               onclick="go('members-screen', this)">/members · Grid</button>
+  <button class="mockup-btn"               onclick="go('onboarding', this)">/onboard · Flow</button>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SCREEN 1 — LANDING
+═══════════════════════════════════════════════════════ -->
+<div id="landing" class="screen active">
+  <nav class="site-nav">
+    <a class="nav-logo" onclick="go('landing', null)">
+      <svg class="s-mark" viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg">
+        <path class="s-path" d="M78 26C78 26 68 10 46 10C24 10 14 25 14 40C14 57 27 65 47 71C67 77 86 86 86 105C86 120 72 122 57 122C37 122 20 108 18 95"/>
+      </svg>
+      Solmae
+    </a>
+    <ul class="nav-links">
+      <li><a onclick="go('creators-screen', null)">Creators</a></li>
+      <li><a onclick="go('onboarding', null)">Join</a></li>
+    </ul>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-eyebrow">Invite Only &nbsp;·&nbsp; Women Who Lead</div>
+    <h1 class="hero-title">The <em>best</em> of the women who inspire you, in one place.</h1>
+    <p class="hero-body">A curated community for leaders, creators, and experts — hand-selected by Jen & Lauren.</p>
+    <div class="hero-cta">
+      <button class="btn-primary" onclick="go('onboarding', null)">Enter Invite Code</button>
+      <span class="or">or</span>
+      <a class="text-link" onclick="go('onboarding', null)">Apply as a Creator →</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="preview-section">
+      <div class="preview-label">Solmae Creators</div>
+      <div class="creators-grid">
+        <div class="creator-card-public">
+          <img class="card-img" src="https://picsum.photos/seed/c1/400/400" alt="">
+          <div class="card-body">
+            <div class="card-name">Nicole Keshishian</div>
+            <div class="card-topics"><span class="chip">Nutrition</span><span class="chip">Wellness</span></div>
+          </div>
+        </div>
+        <div class="creator-card-public">
+          <img class="card-img" src="https://picsum.photos/seed/c2/400/400" alt="">
+          <div class="card-body">
+            <div class="card-name">Shira Gill</div>
+            <div class="card-topics"><span class="chip">Lifestyle</span></div>
+          </div>
+        </div>
+        <div class="creator-card-public">
+          <img class="card-img" src="https://picsum.photos/seed/c3/400/400" alt="">
+          <div class="card-body">
+            <div class="card-name">Brit Morin</div>
+            <div class="card-topics"><span class="chip">Entrepreneurship</span></div>
+          </div>
+        </div>
+        <div class="creator-card-public">
+          <img class="card-img" src="https://picsum.photos/seed/c4/400/400" alt="">
+          <div class="card-body">
+            <div class="card-name">Amy Motroni</div>
+            <div class="card-topics"><span class="chip">Parenthood</span><span class="chip">Lifestyle</span></div>
+          </div>
+        </div>
+        <div class="creator-card-public blurred">
+          <img class="card-img" src="https://picsum.photos/seed/c5/400/400" alt="">
+          <div class="card-body">
+            <div class="card-name">Holly Blakely</div>
+            <div class="card-topics"><span class="chip">Interior Design</span></div>
+          </div>
+        </div>
+        <div class="creator-card-public blurred">
+          <img class="card-img" src="https://picsum.photos/seed/c6/400/400" alt="">
+          <div class="card-body">
+            <div class="card-name">Anh Sundstrom</div>
+            <div class="card-topics"><span class="chip">Fashion</span><span class="chip">Lifestyle</span></div>
+          </div>
+        </div>
+        <div class="creator-card-public blurred">
+          <img class="card-img" src="https://picsum.photos/seed/c7/400/400" alt="">
+          <div class="card-body">
+            <div class="card-name">Anja Michaels</div>
+            <div class="card-topics"><span class="chip">Interior Design</span></div>
+          </div>
+        </div>
+        <div class="creator-card-public blurred">
+          <img class="card-img" src="https://picsum.photos/seed/c8/400/400" alt="">
+          <div class="card-body">
+            <div class="card-name">Vivian Tu</div>
+            <div class="card-topics"><span class="chip">Finance</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="gate-strip">
+    <h2>By invitation only.</h2>
+    <p>Solmae is a curated community. You need an invite code from a current Member to join.</p>
+    <button class="btn-primary" onclick="go('onboarding', null)">Enter Your Invite Code</button>
+  </div>
+
+  <footer class="site-footer">
+    <span class="footer-logo">Solmae</span>
+    <span>© 2026 Solmae. All rights reserved.</span>
+  </footer>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SCREEN 2 — THE EDITION
+═══════════════════════════════════════════════════════ -->
+<div id="edition" class="screen">
+  <nav class="site-nav">
+    <a class="nav-logo"><svg class="s-mark" viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg"><path class="s-path" d="M78 26C78 26 68 10 46 10C24 10 14 25 14 40C14 57 27 65 47 71C67 77 86 86 86 105C86 120 72 122 57 122C37 122 20 108 18 95"/></svg>Solmae</a>
+    <ul class="nav-links">
+      <li><a class="active-link">The Edition</a></li>
+      <li><a onclick="go('creators-screen', null)">Creators</a></li>
+      <li><a onclick="go('members-screen', null)">Members</a></li>
+      <li><a>Profile</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <div class="edition-header">
+      <div>
+        <h1 class="edition-title">The Edition</h1>
+        <div class="edition-meta">From your Bench &nbsp;·&nbsp; Wednesday, March 19, 2026</div>
+      </div>
+      <div class="edition-vol">Vol. XII</div>
+    </div>
+
+    <div class="stories-grid">
+
+      <!-- Story 1 -->
+      <div class="story-card">
+        <img class="story-img" src="https://picsum.photos/seed/s1/600/450" alt="">
+        <div class="story-byline">
+          <img class="byline-avatar" src="https://picsum.photos/seed/c1/64/64" alt="">
+          <span class="byline-name">Nicole Keshishian</span>
+        </div>
+        <span class="story-tag">Nutrition</span>
+        <div class="story-title">The One Anti-Inflammatory Breakfast I Eat Every Single Morning</div>
+        <div class="story-excerpt">After years of experimenting with everything from green smoothies to avocado toast, I've landed on one breakfast that genuinely moves the needle — and it takes five minutes.</div>
+        <div class="story-actions">
+          <button class="action-btn liked" onclick="toggleLike(this)">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            48
+          </button>
+          <button class="action-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            12
+          </button>
+          <button class="action-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            Share
+          </button>
+          <a class="read-link">Read →</a>
+        </div>
+      </div>
+
+      <!-- Story 2 -->
+      <div class="story-card">
+        <img class="story-img" src="https://picsum.photos/seed/s2/600/450" alt="">
+        <div class="story-byline">
+          <img class="byline-avatar" src="https://picsum.photos/seed/c3/64/64" alt="">
+          <span class="byline-name">Brit Morin</span>
+        </div>
+        <span class="story-tag">Entrepreneurship</span>
+        <div class="story-title">Why I Turned Down a $10M Series A — And What I Learned</div>
+        <div class="story-excerpt">The most counterintuitive decision I made as a founder wasn't a product pivot. It was saying no to capital at the exact moment everyone told me to say yes.</div>
+        <div class="story-actions">
+          <button class="action-btn" onclick="toggleLike(this)">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            31
+          </button>
+          <button class="action-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            7
+          </button>
+          <button class="action-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            Share
+          </button>
+          <a class="read-link">Read →</a>
+        </div>
+      </div>
+
+      <!-- Story 3 -->
+      <div class="story-card">
+        <img class="story-img" src="https://picsum.photos/seed/s3/600/450" alt="">
+        <div class="story-byline">
+          <img class="byline-avatar" src="https://picsum.photos/seed/c4/64/64" alt="">
+          <span class="byline-name">Amy Motroni</span>
+        </div>
+        <span class="story-tag">Parenthood</span>
+        <div class="story-title">The 15-Minute Morning Routine That Actually Works With Kids</div>
+        <div class="story-excerpt">I've tried every productivity system on the market. The only one that survived contact with a four-year-old and a six-year-old is embarrassingly simple.</div>
+        <div class="story-actions">
+          <button class="action-btn" onclick="toggleLike(this)">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            24
+          </button>
+          <button class="action-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            9
+          </button>
+          <button class="action-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            Share
+          </button>
+          <a class="read-link">Read →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <span class="footer-logo">Solmae</span>
+    <span>© 2026 Solmae. All rights reserved.</span>
+  </footer>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SCREEN 3 — CREATORS GRID
+═══════════════════════════════════════════════════════ -->
+<div id="creators-screen" class="screen">
+  <nav class="site-nav">
+    <a class="nav-logo"><svg class="s-mark" viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg"><path class="s-path" d="M78 26C78 26 68 10 46 10C24 10 14 25 14 40C14 57 27 65 47 71C67 77 86 86 86 105C86 120 72 122 57 122C37 122 20 108 18 95"/></svg>Solmae</a>
+    <ul class="nav-links">
+      <li><a onclick="go('edition', null)">The Edition</a></li>
+      <li><a class="active-link">Creators</a></li>
+      <li><a onclick="go('members-screen', null)">Members</a></li>
+      <li><a>Profile</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <div class="page-header">
+      <h1 class="page-title">Creators</h1>
+      <p class="page-subtitle">The women behind Solmae. Follow any Creator to add them to your Bench.</p>
+    </div>
+
+    <div class="filters-row">
+      <input class="search-input" type="text" placeholder="Search by name…">
+      <button class="filter-chip active" onclick="setFilter(this)">All</button>
+      <button class="filter-chip" onclick="setFilter(this)">Nutrition</button>
+      <button class="filter-chip" onclick="setFilter(this)">Fitness</button>
+      <button class="filter-chip" onclick="setFilter(this)">Entrepreneurship</button>
+      <button class="filter-chip" onclick="setFilter(this)">Design</button>
+      <button class="filter-chip" onclick="setFilter(this)">Parenthood</button>
+      <button class="filter-chip" onclick="setFilter(this)">Lifestyle</button>
+      <button class="filter-chip" onclick="setFilter(this)">Finance</button>
+      <button class="filter-chip" onclick="setFilter(this)">Fashion</button>
+    </div>
+
+    <div class="grid-4">
+      <div class="creator-card" onclick="go('creator-profile', null)">
+        <img class="card-img" src="https://picsum.photos/seed/c1/400/400" alt="">
+        <div class="card-body">
+          <div class="card-name">Nicole Keshishian</div>
+          <div class="card-topics"><span class="chip">Nutrition</span><span class="chip">Wellness</span></div>
+          <button class="btn-follow is-following" onclick="toggleFollow(event, this)">Following</button>
+        </div>
+      </div>
+      <div class="creator-card" onclick="go('creator-profile', null)">
+        <img class="card-img" src="https://picsum.photos/seed/c2/400/400" alt="">
+        <div class="card-body">
+          <div class="card-name">Shira Gill</div>
+          <div class="card-topics"><span class="chip">Lifestyle</span></div>
+          <button class="btn-follow" onclick="toggleFollow(event, this)">Follow</button>
+        </div>
+      </div>
+      <div class="creator-card" onclick="go('creator-profile', null)">
+        <img class="card-img" src="https://picsum.photos/seed/c3/400/400" alt="">
+        <div class="card-body">
+          <div class="card-name">Brit Morin</div>
+          <div class="card-topics"><span class="chip">Entrepreneurship</span></div>
+          <button class="btn-follow is-following" onclick="toggleFollow(event, this)">Following</button>
+        </div>
+      </div>
+      <div class="creator-card">
+        <img class="card-img" src="https://picsum.photos/seed/c5/400/400" alt="">
+        <div class="card-body">
+          <div class="card-name">Holly Blakely</div>
+          <div class="card-topics"><span class="chip">Interior Design</span></div>
+          <button class="btn-follow" onclick="toggleFollow(event, this)">Follow</button>
+        </div>
+      </div>
+      <div class="creator-card">
+        <img class="card-img" src="https://picsum.photos/seed/c4/400/400" alt="">
+        <div class="card-body">
+          <div class="card-name">Amy Motroni</div>
+          <div class="card-topics"><span class="chip">Parenthood</span><span class="chip">Lifestyle</span></div>
+          <button class="btn-follow" onclick="toggleFollow(event, this)">Follow</button>
+        </div>
+      </div>
+      <div class="creator-card">
+        <img class="card-img" src="https://picsum.photos/seed/c6/400/400" alt="">
+        <div class="card-body">
+          <div class="card-name">Anh Sundstrom</div>
+          <div class="card-topics"><span class="chip">Fashion</span><span class="chip">Lifestyle</span></div>
+          <button class="btn-follow" onclick="toggleFollow(event, this)">Follow</button>
+        </div>
+      </div>
+      <div class="creator-card">
+        <img class="card-img" src="https://picsum.photos/seed/c7/400/400" alt="">
+        <div class="card-body">
+          <div class="card-name">Anja Michaels</div>
+          <div class="card-topics"><span class="chip">Interior Design</span></div>
+          <button class="btn-follow" onclick="toggleFollow(event, this)">Follow</button>
+        </div>
+      </div>
+      <div class="creator-card">
+        <img class="card-img" src="https://picsum.photos/seed/c8/400/400" alt="">
+        <div class="card-body">
+          <div class="card-name">Vivian Tu</div>
+          <div class="card-topics"><span class="chip">Finance</span></div>
+          <button class="btn-follow" onclick="toggleFollow(event, this)">Follow</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <span class="footer-logo">Solmae</span>
+    <span>© 2026 Solmae. All rights reserved.</span>
+  </footer>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SCREEN 4 — CREATOR PROFILE
+═══════════════════════════════════════════════════════ -->
+<div id="creator-profile" class="screen">
+  <nav class="site-nav">
+    <a class="nav-logo"><svg class="s-mark" viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg"><path class="s-path" d="M78 26C78 26 68 10 46 10C24 10 14 25 14 40C14 57 27 65 47 71C67 77 86 86 86 105C86 120 72 122 57 122C37 122 20 108 18 95"/></svg>Solmae</a>
+    <ul class="nav-links">
+      <li><a onclick="go('edition', null)">The Edition</a></li>
+      <li><a onclick="go('creators-screen', null)">Creators</a></li>
+      <li><a onclick="go('members-screen', null)">Members</a></li>
+      <li><a>Profile</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <a class="back-link" onclick="go('creators-screen', null)">← Back to Creators</a>
+
+    <div class="profile-hero">
+      <div>
+        <img class="profile-photo" src="https://picsum.photos/seed/c1/400/400" alt="Nicole Keshishian">
+      </div>
+      <div class="profile-info">
+        <h1 class="profile-name">Nicole Keshishian</h1>
+        <div class="profile-topics">
+          <span class="chip">Nutrition</span>
+          <span class="chip">Wellness</span>
+          <span class="chip">Perimenopause</span>
+        </div>
+        <p class="profile-blurb">Creator of @kalejunkie — nourishing, anti-inflammatory recipes that actually taste good. Based in Corte Madera, CA. Helping 2.8M people eat better, without the guilt or the overwhelm.</p>
+        <div class="social-row">
+          <a class="social-pill">Instagram</a>
+          <a class="social-pill">Substack</a>
+          <a class="social-pill">YouTube</a>
+        </div>
+        <button class="btn-primary" id="profileFollowBtn" onclick="toggleProfileFollow()">Following ✓</button>
+      </div>
+    </div>
+
+    <div class="feed-label">Content</div>
+    <div class="content-grid">
+      <div class="content-card">
+        <img class="content-img" src="https://picsum.photos/seed/s1/600/340" alt="">
+        <div class="content-body">
+          <div class="content-format">Article · Repost</div>
+          <div class="content-title">The One Anti-Inflammatory Breakfast I Eat Every Single Morning</div>
+          <div class="content-excerpt">After years of experimenting, I've landed on one breakfast that genuinely moves the needle…</div>
+        </div>
+      </div>
+      <div class="content-card">
+        <img class="content-img" src="https://picsum.photos/seed/s4/600/340" alt="">
+        <div class="content-body">
+          <div class="content-format">Video · Repost</div>
+          <div class="content-title">5 Hormonal Health Habits I Wish I'd Started in My 30s</div>
+          <div class="content-excerpt">A practical guide to the lifestyle shifts that actually support hormone balance long term…</div>
+        </div>
+      </div>
+      <div class="content-card">
+        <img class="content-img" src="https://picsum.photos/seed/s5/600/340" alt="">
+        <div class="content-body">
+          <div class="content-format exclusive-badge">★ Exclusive · Article</div>
+          <div class="content-title exclusive-badge">My Complete Perimenopause Nutrition Protocol</div>
+          <div class="content-excerpt">Written exclusively for Solmae Members. The full protocol — not the Instagram version.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <span class="footer-logo">Solmae</span>
+    <span>© 2026 Solmae. All rights reserved.</span>
+  </footer>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SCREEN 5 — MEMBERS GRID
+═══════════════════════════════════════════════════════ -->
+<div id="members-screen" class="screen">
+  <nav class="site-nav">
+    <a class="nav-logo"><svg class="s-mark" viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg"><path class="s-path" d="M78 26C78 26 68 10 46 10C24 10 14 25 14 40C14 57 27 65 47 71C67 77 86 86 86 105C86 120 72 122 57 122C37 122 20 108 18 95"/></svg>Solmae</a>
+    <ul class="nav-links">
+      <li><a onclick="go('edition', null)">The Edition</a></li>
+      <li><a onclick="go('creators-screen', null)">Creators</a></li>
+      <li><a class="active-link">Members</a></li>
+      <li><a>Profile</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <div class="page-header">
+      <h1 class="page-title">Members</h1>
+      <p class="page-subtitle">The Solmae community. Browse by topic and see what fellow Members are reading.</p>
+    </div>
+
+    <div class="filters-row">
+      <input class="search-input" type="text" placeholder="Search members…">
+      <button class="filter-chip active" onclick="setFilter(this)">All</button>
+      <button class="filter-chip" onclick="setFilter(this)">Wellness</button>
+      <button class="filter-chip" onclick="setFilter(this)">Fitness</button>
+      <button class="filter-chip" onclick="setFilter(this)">Entrepreneurship</button>
+      <button class="filter-chip" onclick="setFilter(this)">Design</button>
+      <button class="filter-chip" onclick="setFilter(this)">Parenthood</button>
+      <button class="filter-chip" onclick="setFilter(this)">Lifestyle</button>
+    </div>
+
+    <div class="grid-5">
+      <div class="member-card"><img class="member-avatar" src="https://picsum.photos/seed/m1/150/150" alt=""><div class="member-name">Sarah M.</div><div class="member-topics"><span class="chip">Wellness</span><span class="chip">Fitness</span></div></div>
+      <div class="member-card"><img class="member-avatar" src="https://picsum.photos/seed/m2/150/150" alt=""><div class="member-name">Jen L.</div><div class="member-topics"><span class="chip">Entrepreneurship</span></div></div>
+      <div class="member-card"><img class="member-avatar" src="https://picsum.photos/seed/m3/150/150" alt=""><div class="member-name">Amanda K.</div><div class="member-topics"><span class="chip">Design</span><span class="chip">Lifestyle</span></div></div>
+      <div class="member-card"><img class="member-avatar" src="https://picsum.photos/seed/m4/150/150" alt=""><div class="member-name">Rachel T.</div><div class="member-topics"><span class="chip">Nutrition</span></div></div>
+      <div class="member-card"><img class="member-avatar" src="https://picsum.photos/seed/m5/150/150" alt=""><div class="member-name">Emily W.</div><div class="member-topics"><span class="chip">Parenthood</span><span class="chip">Wellness</span></div></div>
+      <div class="member-card"><img class="member-avatar" src="https://picsum.photos/seed/m6/150/150" alt=""><div class="member-name">Claire B.</div><div class="member-topics"><span class="chip">Fashion</span></div></div>
+      <div class="member-card"><img class="member-avatar" src="https://picsum.photos/seed/m7/150/150" alt=""><div class="member-name">Lauren D.</div><div class="member-topics"><span class="chip">Finance</span><span class="chip">Entrepreneurship</span></div></div>
+      <div class="member-card"><img class="member-avatar" src="https://picsum.photos/seed/m8/150/150" alt=""><div class="member-name">Maya P.</div><div class="member-topics"><span class="chip">Fitness</span></div></div>
+      <div class="member-card"><img class="member-avatar" src="https://picsum.photos/seed/m9/150/150" alt=""><div class="member-name">Kate O.</div><div class="member-topics"><span class="chip">Lifestyle</span><span class="chip">Travel</span></div></div>
+      <div class="member-card"><img class="member-avatar" src="https://picsum.photos/seed/m10/150/150" alt=""><div class="member-name">Sofia R.</div><div class="member-topics"><span class="chip">Wellness</span></div></div>
+      <div class="member-card"><img class="member-avatar" src="https://picsum.photos/seed/m11/150/150" alt=""><div class="member-name">Dana V.</div><div class="member-topics"><span class="chip">Travel</span></div></div>
+      <div class="member-card"><img class="member-avatar" src="https://picsum.photos/seed/m12/150/150" alt=""><div class="member-name">Priya S.</div><div class="member-topics"><span class="chip">Nutrition</span><span class="chip">Fitness</span></div></div>
+      <div class="member-card"><img class="member-avatar" src="https://picsum.photos/seed/m13/150/150" alt=""><div class="member-name">Brooke H.</div><div class="member-topics"><span class="chip">Parenthood</span></div></div>
+      <div class="member-card"><img class="member-avatar" src="https://picsum.photos/seed/m14/150/150" alt=""><div class="member-name">Chloe M.</div><div class="member-topics"><span class="chip">Entrepreneurship</span></div></div>
+      <div class="member-card"><img class="member-avatar" src="https://picsum.photos/seed/m15/150/150" alt=""><div class="member-name">Tara L.</div><div class="member-topics"><span class="chip">Design</span><span class="chip">Lifestyle</span></div></div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <span class="footer-logo">Solmae</span>
+    <span>© 2026 Solmae. All rights reserved.</span>
+  </footer>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SCREEN 6 — ONBOARDING FLOW
+═══════════════════════════════════════════════════════ -->
+<div id="onboarding" class="screen">
+  <nav class="site-nav">
+    <a class="nav-logo" onclick="go('landing', null)"><svg class="s-mark" viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg"><path class="s-path" d="M78 26C78 26 68 10 46 10C24 10 14 25 14 40C14 57 27 65 47 71C67 77 86 86 86 105C86 120 72 122 57 122C37 122 20 108 18 95"/></svg>Solmae</a>
+  </nav>
+
+  <div class="onboard-wrap">
+    <div class="step-bar">
+      <div class="step-bar-item active"  id="bar1"></div>
+      <div class="step-bar-item"         id="bar2"></div>
+      <div class="step-bar-item"         id="bar3"></div>
+      <div class="step-bar-item"         id="bar4"></div>
+    </div>
+
+    <!-- Step 1 — Role -->
+    <div class="onboard-step active" id="step1">
+      <div class="step-eyebrow">Step 1 of 4</div>
+      <h2 class="step-title">How are you joining Solmae?</h2>
+      <p class="step-subtitle">You're here because someone in the community shared an invite. Tell us how you'd like to participate.</p>
+      <div class="role-grid">
+        <div class="role-card selected" id="roleMember" onclick="pickRole('member')">
+          <div class="role-icon">◎</div>
+          <div class="role-title">Member</div>
+          <div class="role-desc">Discover content, follow Creators, and connect with the community. Auto-approved instantly.</div>
+        </div>
+        <div class="role-card" id="roleCreator" onclick="pickRole('creator')">
+          <div class="role-icon">✦</div>
+          <div class="role-title">Creator</div>
+          <div class="role-desc">Feature your content on Solmae. Applications are reviewed by Jen & Lauren.</div>
+        </div>
+      </div>
+      <button class="btn-primary" style="width:100%;" onclick="toStep(2)">Continue →</button>
+    </div>
+
+    <!-- Step 2 — Auth -->
+    <div class="onboard-step" id="step2">
+      <div class="step-eyebrow">Step 2 of 4</div>
+      <h2 class="step-title">Create your account.</h2>
+      <p class="step-subtitle">We'll pull in your name and photo automatically. You can edit everything on the next step.</p>
+      <div class="oauth-stack">
+        <button class="oauth-btn" onclick="toStep(3)">
+          <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+          Continue with Google
+        </button>
+        <button class="oauth-btn" onclick="toStep(3)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Continue with Facebook
+        </button>
+      </div>
+      <button class="back-step" onclick="toStep(1)">← Back</button>
+    </div>
+
+    <!-- Step 3 — Profile -->
+    <div class="onboard-step" id="step3">
+      <div class="step-eyebrow">Step 3 of 4</div>
+      <h2 class="step-title">Your profile.</h2>
+      <p class="step-subtitle">Help the community get to know you. At least one social handle is required.</p>
+
+      <div class="form-group">
+        <label class="form-label">Blurb <span class="opt">— a sentence or two about you</span></label>
+        <textarea class="form-textarea" placeholder="e.g. Mom of two, entrepreneur, passionate about perimenopause awareness and making wellness genuinely accessible."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Location <span class="opt">(optional)</span></label>
+        <input class="form-input" type="text" placeholder="e.g. Mill Valley, CA">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Social Handles <span class="opt">— at least one required</span></label>
+        <div class="handles-grid">
+          <div class="handle-field"><span class="handle-platform">IG</span><input type="text" placeholder="@handle"></div>
+          <div class="handle-field"><span class="handle-platform">X</span><input type="text" placeholder="@handle"></div>
+          <div class="handle-field"><span class="handle-platform">TikTok</span><input type="text" placeholder="@handle"></div>
+          <div class="handle-field"><span class="handle-platform">LinkedIn</span><input type="text" placeholder="URL or name"></div>
+          <div class="handle-field"><span class="handle-platform">FB</span><input type="text" placeholder="@handle"></div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Topics of Interest</label>
+        <div class="topics-wrap">
+          <button class="topic-chip selected" onclick="this.classList.toggle('selected')">Nutrition</button>
+          <button class="topic-chip selected" onclick="this.classList.toggle('selected')">Wellness</button>
+          <button class="topic-chip" onclick="this.classList.toggle('selected')">Fitness</button>
+          <button class="topic-chip" onclick="this.classList.toggle('selected')">Parenthood</button>
+          <button class="topic-chip" onclick="this.classList.toggle('selected')">Perimenopause</button>
+          <button class="topic-chip" onclick="this.classList.toggle('selected')">Entrepreneurship</button>
+          <button class="topic-chip" onclick="this.classList.toggle('selected')">Design</button>
+          <button class="topic-chip" onclick="this.classList.toggle('selected')">Fashion</button>
+          <button class="topic-chip" onclick="this.classList.toggle('selected')">Lifestyle</button>
+          <button class="topic-chip" onclick="this.classList.toggle('selected')">Finance</button>
+          <button class="topic-chip" onclick="this.classList.toggle('selected')">Travel</button>
+          <button class="topic-chip" onclick="this.classList.toggle('selected')">Interior Design</button>
+          <button class="topic-chip" onclick="this.classList.toggle('selected')">Real Estate</button>
+          <button class="topic-chip" onclick="this.classList.toggle('selected')">Food</button>
+          <button class="topic-chip" onclick="this.classList.toggle('selected')">Beauty</button>
+        </div>
+      </div>
+
+      <button class="btn-primary" style="width:100%; margin-top:8px;" onclick="toStep(4)">Complete Profile →</button>
+      <button class="back-step" onclick="toStep(2)">← Back</button>
+    </div>
+
+    <!-- Step 4 — Success -->
+    <div class="onboard-step" id="step4">
+      <div class="success-wrap">
+        <div class="success-circle">✓</div>
+        <div class="step-eyebrow" style="text-align:center;">Welcome to Solmae</div>
+        <h2 class="step-title" style="text-align:center;">You're in.</h2>
+        <p class="step-subtitle" style="text-align:center; max-width:360px; margin: 0 auto 0;">
+          Your membership is active. Head to The Edition to see today's curated stories — or browse Creators to start building your Bench.
+        </p>
+        <div class="success-cta">
+          <button class="btn-primary" onclick="go('edition', null)">Read The Edition</button>
+          <button class="btn-secondary" onclick="go('creators-screen', null)">Browse Creators</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<script>
+  // ── Screen navigation ──────────────────────────
+  function go(id, btn) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    if (btn) {
+      document.querySelectorAll('.mockup-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+    window.scrollTo(0, 0);
+  }
+
+  // ── Onboarding steps ──────────────────────────
+  function toStep(n) {
+    document.querySelectorAll('.onboard-step').forEach(s => s.classList.remove('active'));
+    document.getElementById('step' + n).classList.add('active');
+    for (let i = 1; i <= 4; i++) {
+      const bar = document.getElementById('bar' + i);
+      bar.classList.remove('active', 'done');
+      if (i < n)  bar.classList.add('done');
+      if (i === n) bar.classList.add('active');
+    }
+    document.getElementById('onboarding').scrollTo(0, 0);
+    window.scrollTo(0, 0);
+  }
+
+  function pickRole(r) {
+    document.getElementById('roleMember').classList.toggle('selected', r === 'member');
+    document.getElementById('roleCreator').classList.toggle('selected', r === 'creator');
+  }
+
+  // ── Follow toggle ──────────────────────────────
+  function toggleFollow(e, btn) {
+    e.stopPropagation();
+    const following = btn.classList.toggle('is-following');
+    btn.textContent = following ? 'Following' : 'Follow';
+  }
+
+  function toggleProfileFollow() {
+    const btn = document.getElementById('profileFollowBtn');
+    const following = btn.dataset.following === 'true';
+    btn.dataset.following = !following;
+    btn.textContent = following ? 'Follow' : 'Following ✓';
+    btn.style.background = following ? 'var(--salmon)' : 'var(--near-black)';
+  }
+  document.getElementById('profileFollowBtn').dataset.following = 'true';
+  document.getElementById('profileFollowBtn').style.background = 'var(--near-black)';
+
+  // ── Like toggle ────────────────────────────────
+  function toggleLike(btn) {
+    btn.classList.toggle('liked');
+  }
+
+  // ── Filter chips ───────────────────────────────
+  function setFilter(chip) {
+    chip.closest('.filters-row').querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+  }
+</script>
+</body>
+</html>
