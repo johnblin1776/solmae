@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
-import { Libre_Bodoni, Nunito_Sans, Geist } from "next/font/google";
-import "./globals.css";
+import { Libre_Bodoni, Nunito_Sans } from "next/font/google";
 import { cn } from "@/lib/utils";
-
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+import "./globals.css";
 
 const bodoni = Libre_Bodoni({
   variable: "--font-bodoni",
@@ -31,8 +29,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn("h-full", "antialiased", bodoni.variable, nunito.variable, "font-sans", geist.variable)}>
-      <body className="min-h-full flex flex-col bg-offwhite text-nearblack">
+    <html lang="en" className={cn("h-full antialiased", bodoni.variable, nunito.variable)}>
+      <body className="min-h-full flex flex-col">
         {children}
       </body>
     </html>
