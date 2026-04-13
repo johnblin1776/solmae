@@ -8,8 +8,6 @@ export default function EditionPage() {
     weekday: "long", month: "long", day: "numeric", year: "numeric",
   });
 
-  const [hero, ...rest] = CONTENT_ITEMS;
-
   return (
     <>
       <AppNav />
@@ -30,8 +28,7 @@ export default function EditionPage() {
         </div>
       </div>
 
-      {/* Bench filter tabs */}
-      <EditionClient items={CONTENT_ITEMS} hero={hero} rest={rest} />
+      <EditionClient allItems={CONTENT_ITEMS} />
     </>
   );
 }
