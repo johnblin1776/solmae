@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Libre_Bodoni, Nunito_Sans } from "next/font/google";
 import { cn } from "@/lib/utils";
+import { DevNav } from "@/components/dev-nav";
 import "./globals.css";
 
 const bodoni = Libre_Bodoni({
@@ -30,7 +31,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={cn("h-full antialiased", bodoni.variable, nunito.variable)}>
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col pt-[41px]">
+        <DevNav />
         {children}
       </body>
     </html>
