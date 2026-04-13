@@ -1,14 +1,22 @@
 import { AppNav } from "@/components/nav/app-nav";
+import { CREATORS } from "@/lib/seed-data";
+import { CreatorsClient } from "./creators-client";
 
 export default function CreatorsPage() {
   return (
     <>
       <AppNav />
-      <main className="flex-1 max-w-6xl mx-auto w-full px-6 py-12">
-        <h1 className="font-serif italic text-4xl text-nearblack mb-1">Creators</h1>
-        <p className="text-gray text-sm mb-10">Discover the voices behind Solmae.</p>
-        {/* TODO: creators grid with search + topic filter */}
-      </main>
+      <div className="max-w-[1248px] mx-auto w-full px-14 py-13">
+        <div className="mb-8">
+          <h1 className="font-serif text-4xl font-normal text-nearblack tracking-[-0.5px] mb-1.5">
+            Creators
+          </h1>
+          <p className="text-[14px] text-gray">
+            Add Creators to your Bench — they shape your daily Edition.
+          </p>
+        </div>
+        <CreatorsClient creators={CREATORS} />
+      </div>
     </>
   );
 }
