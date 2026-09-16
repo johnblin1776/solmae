@@ -19,9 +19,13 @@ export function SiteFooter({ dark = true }: { dark?: boolean }) {
           <MarkHalved className="size-6" />
           <span className="font-display italic text-[20px] tracking-[0.04em] lowercase">solmae</span>
         </Link>
-        <nav className="flex flex-wrap items-center gap-x-6 gap-y-2 text-[11px] font-semibold tracking-[0.14em] uppercase">
+        <nav className="flex flex-wrap items-center gap-x-6 gap-y-1 text-[11px] font-semibold tracking-[0.14em] uppercase">
           {links.map((link) => (
-            <Link key={link.href} href={link.href} className="opacity-80 transition-opacity hover:opacity-100">
+            <Link
+              key={link.href}
+              href={link.href}
+              className="inline-flex min-h-11 items-center opacity-80 transition-opacity hover:opacity-100 sm:min-h-0"
+            >
               {link.label}
             </Link>
           ))}
@@ -30,7 +34,7 @@ export function SiteFooter({ dark = true }: { dark?: boolean }) {
               href={instagram}
               target="_blank"
               rel="noreferrer"
-              className="opacity-80 transition-opacity hover:opacity-100"
+              className="inline-flex min-h-11 items-center opacity-80 transition-opacity hover:opacity-100 sm:min-h-0"
             >
               Instagram
             </a>

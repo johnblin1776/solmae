@@ -153,13 +153,13 @@ export default function AboutPage() {
         <div className="mt-16 flex flex-wrap gap-4">
           <Link
             href="/#join"
-            className="inline-flex items-center rounded-full bg-coral px-5 py-2.5 text-[11px] font-semibold tracking-[0.14em] text-white uppercase"
+            className="inline-flex min-h-11 items-center rounded-full bg-coral px-5 py-2.5 text-[11px] font-semibold tracking-[0.14em] text-white uppercase sm:min-h-0"
           >
             Join Us
           </Link>
           <Link
             href="/founding-50"
-            className="inline-flex items-center rounded-full border border-ink/15 px-5 py-2.5 text-[11px] font-semibold tracking-[0.14em] text-ink uppercase"
+            className="inline-flex min-h-11 items-center rounded-full border border-ink/15 px-5 py-2.5 text-[11px] font-semibold tracking-[0.14em] text-ink uppercase sm:min-h-0"
           >
             Founding 50
           </Link>

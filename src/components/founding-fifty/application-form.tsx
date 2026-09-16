@@ -106,7 +106,7 @@ export function FoundingFiftyForm() {
       <button
         type="submit"
         disabled={status === "loading"}
-        className="inline-flex items-center rounded-full bg-ink px-6 py-3 text-[11px] font-semibold tracking-[0.16em] text-white uppercase transition-colors hover:bg-[#333] disabled:opacity-50"
+        className="inline-flex min-h-11 items-center rounded-full bg-ink px-6 py-3 text-[11px] font-semibold tracking-[0.16em] text-white uppercase transition-colors hover:bg-[#333] disabled:opacity-50 sm:min-h-0"
       >
         {status === "loading" ? "Sending…" : "Apply to the Founding 50"}
       </button>
