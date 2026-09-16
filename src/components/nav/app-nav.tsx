@@ -15,7 +15,7 @@ export function AppNav() {
   const pathname = usePathname();
 
   return (
-    <header className="bg-white border-b border-lightgray h-[60px] flex items-center px-14 sticky top-[41px] z-50">
+    <header className="bg-white border-b border-lightgray h-[60px] flex items-center px-14 sticky top-[var(--dev-nav-h,0px)] z-50">
       <Link href="/home" className="font-serif italic text-xl text-nearblack tracking-wide mr-12">
         Solmae
       </Link>

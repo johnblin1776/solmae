@@ -1,25 +1,20 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { MarkHalved } from "@/lib/marks";
 
-export function PublicNav() {
+export function PublicNav({ joinHref = "/#join" }: { joinHref?: string }) {
   return (
-    <header className="bg-white border-b border-lightgray h-[60px] flex items-center px-14">
-      <div className="flex items-center justify-between w-full">
-        <Link href="/" className="font-serif italic text-xl text-nearblack tracking-wide">
-          Solmae
+    <header className="relative z-20 bg-cream/80 backdrop-blur-sm">
+      <div className="mx-auto flex h-[72px] w-full max-w-[1120px] items-center justify-between px-6 sm:px-10">
+        <Link href="/" className="flex items-center gap-2.5 text-ink">
+          <MarkHalved className="size-7" />
+          <span className="font-display italic text-[22px] tracking-[0.04em] lowercase">solmae</span>
         </Link>
-        <div className="flex items-center gap-3">
-          <Link href="/invite">
-            <Button variant="outline" size="sm" className="text-[11px] font-bold tracking-widest uppercase rounded-[2px]">
-              Enter Invite Code
-            </Button>
-          </Link>
-          <Link href="/apply">
-            <Button size="sm" className="bg-nearblack text-white text-[11px] font-bold tracking-widest uppercase rounded-[2px] hover:bg-[#333]">
-              Apply as Creator
-            </Button>
-          </Link>
-        </div>
+        <Link
+          href={joinHref}
+          className="inline-flex items-center rounded-full bg-coral px-5 py-2 text-[11px] font-semibold tracking-[0.14em] text-white uppercase transition-colors hover:bg-[#d94d40]"
+        >
+          Join Us
+        </Link>
       </div>
     </header>
   );
