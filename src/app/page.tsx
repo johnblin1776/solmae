@@ -1,145 +1,90 @@
 import Link from "next/link";
 import { PublicNav } from "@/components/nav/public-nav";
+import { SiteFooter } from "@/components/nav/site-footer";
+import { WaitlistForm } from "@/components/waitlist/waitlist-form";
+import { BrandMark, MarkHalved } from "@/lib/marks";
+import { pillars, site } from "@/lib/site";
 
-const SEED_CREATORS = [
-  { name: "Nicole Keshishian", topics: ["Nutrition", "Recipes"], avatarUrl: "https://kalejunkie.com/wp-content/uploads/2025/09/main-image.webp" },
-  { name: "Shira Gill", topics: ["Lifestyle", "Wellness"], avatarUrl: "https://shiragill.com/wp-content/uploads/BeccaMeyerMillValley_7036-Edita-scaled.jpg" },
-  { name: "Brit Morin", topics: ["Entrepreneurship"], avatarUrl: "https://images.squarespace-cdn.com/content/v1/6303fb9404a0cf0cd130ef3c/f7b9ac1c-b3cb-42e6-aa9d-982f34d5507a/Brit+Morin+Headshot.jpg" },
-  { name: "Holly Blakey", topics: ["Design", "Home"], avatarUrl: "https://static1.squarespace.com/static/5b0b65b8f407b4a4414db2ee/5ea6de0a41e9232ab0a8b58d/639fd7597ca60c5b989498a5/1713378056113/Holly+June+20220467.jpg?format=1500w" },
-  { name: "Kate Ogata", topics: ["Fitness"], initials: "KO", avatarColor: "linear-gradient(135deg,#B5D5F7,#78aadf)" },
-  { name: "Amy Motroni", topics: ["Parenthood", "Wellness"], avatarUrl: "https://geniusmomhacks.com/wp-content/uploads/2023/11/Amy-Motroni.jpg" },
-  { name: "Caitlin Flemming", topics: ["Design", "Interior"], initials: "CF", avatarColor: "linear-gradient(135deg,#C4B5E0,#9080c0)" },
-  { name: "Anh Sundstrom", topics: ["Fashion", "Lifestyle"], avatarUrl: "https://9to5chic.com/wp-content/uploads/2016/10/DSC_0332-copy-3.jpg" },
-] as const;
-
-function CreatorAvatar({ creator }: { creator: (typeof SEED_CREATORS)[number] }) {
-  if ("avatarUrl" in creator) {
-    // eslint-disable-next-line @next/next/no-img-element
-    return <img src={creator.avatarUrl} alt={creator.name} className="w-full h-full object-cover" />;
-  }
-  return <span className="font-serif italic text-2xl text-white">{creator.initials}</span>;
-}
+const toneClass = {
+  periwinkle: "bg-periwinkle",
+  blush: "bg-blush",
+  peach: "bg-peach",
+} as const;
 
 export default function LandingPage() {
   return (
-    <>
+    <div className="flex min-h-full flex-1 flex-col bg-cream">
       <PublicNav />
 
-      {/* ── HERO ── */}
-      <section className="bg-nearblack relative overflow-hidden px-14 py-24 text-center">
+      <section className="relative overflow-hidden px-4 pb-20 pt-6 sm:px-8 sm:pb-28 sm:pt-10">
         <div
           aria-hidden
-          className="font-serif italic absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[600px] leading-none pointer-events-none select-none"
-          style={{ color: "rgba(254,157,148,0.05)" }}
-        >
-          S
-        </div>
+          className="pointer-events-none absolute inset-x-[8%] top-10 h-[78%] rounded-[48px] bg-periwinkle/90 sm:inset-x-[14%]"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute bottom-8 left-[18%] right-[18%] h-16 rounded-[32px] bg-cream"
+        />
 
-        <p className="relative text-[10px] font-bold tracking-[3px] uppercase text-salmon mb-7">
-          Invite Only · Women in Leadership
-        </p>
-
-        <h1 className="relative font-serif text-[clamp(40px,6vw,64px)] font-normal text-white leading-[1.1] tracking-[-1.5px] max-w-[700px] mx-auto mb-5">
-          Where women who <em className="text-salmon">lead</em> come to be inspired.
-        </h1>
-
-        <p className="relative text-base text-white/55 max-w-[420px] mx-auto mb-11 font-light leading-[1.8]">
-          A curated community of creators, founders, experts, and makers — sharing what they know, discover, and love.
-        </p>
-
-        <div className="relative flex gap-3 justify-center flex-wrap">
-          <Link
-            href="/invite"
-            className="inline-flex items-center px-6 py-3 bg-salmon text-nearblack text-[11px] font-bold tracking-widest uppercase rounded-[2px] hover:bg-[#fd8a7f] transition-colors"
-          >
-            Enter Your Invite Code
-          </Link>
-          <Link
-            href="/apply"
-            className="inline-flex items-center px-6 py-3 text-white/80 text-[11px] font-bold tracking-widest uppercase rounded-[2px] border border-white/40 hover:border-white hover:text-white transition-colors"
-          >
-            Apply as a Creator
-          </Link>
-        </div>
-      </section>
-
-      {/* ── CREATORS GRID ── */}
-      <section className="max-w-[1248px] mx-auto w-full px-14 py-[72px]">
-        <p className="text-[10px] font-bold tracking-[2.5px] uppercase text-gray mb-1.5">Our Creators</p>
-        <h2 className="font-serif text-4xl font-normal text-nearblack tracking-[-0.5px] mb-2">
-          The voices behind Solmae
-        </h2>
-        <p className="text-sm text-gray max-w-[480px] mb-11 leading-[1.7]">
-          Writers, founders, doctors, designers, and makers — hand-selected by Jen and Lauren.
-        </p>
-
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
-          {SEED_CREATORS.map((creator) => (
-            <div
-              key={creator.name}
-              className="bg-white border border-lightgray px-5 py-7 text-center relative overflow-hidden"
-            >
-              <div
-                aria-hidden
-                className="absolute inset-0 bg-gradient-to-t from-offwhite/60 to-transparent pointer-events-none"
-              />
-              <div
-                className="w-[76px] h-[76px] rounded-full mx-auto mb-3.5 flex items-center justify-center overflow-hidden"
-                style={"avatarColor" in creator ? { background: creator.avatarColor } : { background: "#CCCEEF" }}
-              >
-                <CreatorAvatar creator={creator} />
-              </div>
-              <p className="relative font-serif text-base font-medium text-nearblack mb-2">
-                {creator.name}
-              </p>
-              <div className="relative flex flex-wrap gap-1 justify-center">
-                {creator.topics.map((t) => (
-                  <span
-                    key={t}
-                    className="inline-block px-1.5 py-0.5 bg-lavender text-[#5558a0] text-[9px] font-bold tracking-[0.8px] uppercase rounded-[2px]"
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <hr className="border-t border-lightgray mx-14" />
-
-      {/* ── ABOUT / STATS ── */}
-      <section className="bg-nearblack px-14 py-20 grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
-        <div>
-          <h2 className="font-serif text-[40px] font-normal text-white leading-[1.2] tracking-[-0.5px] mb-5">
-            Built for women who{" "}
-            <em className="text-salmon">do the work.</em>
-          </h2>
-          <p className="text-[15px] text-white/60 leading-[1.9] mb-8 font-light">
-            Solmae is an invite-only space where the content finds you — curated daily from the creators you trust, in the topics that matter to you. No algorithm. No noise. Just signal.
+        <div className="relative mx-auto max-w-[560px] rounded-[36px] bg-white px-8 py-14 text-center shadow-[0_30px_80px_rgba(26,26,26,0.08)] sm:px-14 sm:py-16">
+          <p className="font-display italic text-[28px] tracking-[0.04em] text-periwinkle lowercase sm:text-[32px]">
+            solmae
           </p>
-          <Link
-            href="/invite"
-            className="inline-flex items-center px-6 py-3 bg-salmon text-nearblack text-[11px] font-bold tracking-widest uppercase rounded-[2px] hover:bg-[#fd8a7f] transition-colors"
-          >
-            Enter Your Invite Code
-          </Link>
-        </div>
-
-        <div className="flex flex-col gap-6">
-          {[
-            { num: "50+", label: "Founding Creators across nutrition, design, fitness & more" },
-            { num: "3",   label: "Curated stories in every daily Edition, chosen from your Bench" },
-            { num: "5",   label: "Invite slots available per Member each month" },
-          ].map(({ num, label }) => (
-            <div key={num} className="border-l-2 border-salmon pl-5">
-              <div className="font-serif text-[40px] text-white leading-none mb-1">{num}</div>
-              <div className="text-[13px] text-white/50">{label}</div>
-            </div>
-          ))}
+          <MarkHalved className="mx-auto mt-5 size-10 text-ink" />
+          <h1 className="mx-auto mt-8 max-w-[14ch] font-serif text-[clamp(34px,5vw,52px)] leading-[1.12] font-normal tracking-[-0.03em] text-ink">
+            {site.headline}
+          </h1>
+          <p className="mx-auto mt-5 max-w-[28ch] text-[15px] leading-7 text-coral">
+            {site.dek}
+          </p>
+          <p className="mx-auto mt-4 max-w-[36ch] text-[14px] leading-7 text-ink/45">
+            {site.description}
+          </p>
+          <div id="join" className="mx-auto mt-10 max-w-[340px] scroll-mt-28">
+            <WaitlistForm source="landing" />
+          </div>
+          <p className="mt-6 text-[13px] text-ink/40">
+            <Link href="/founding-50" className="underline decoration-ink/20 underline-offset-4 hover:text-ink">
+              Be part of the founding circle.
+            </Link>
+          </p>
         </div>
       </section>
-    </>
+
+      <section className="bg-cream px-6 pb-8 pt-4 text-center sm:px-10">
+        <p className="text-[11px] font-semibold tracking-[0.2em] text-ink/40 uppercase">
+          03 · The Three Pillars
+        </p>
+        <h2 className="mt-4 font-serif text-[clamp(32px,5vw,48px)] tracking-[-0.03em] text-ink">
+          Inspiration. Education. Connection.
+        </h2>
+        <p className="mt-3 text-sm text-ink/45">Each pillar carries a different hand-drawn mark.</p>
+      </section>
+
+      <section className="grid grid-cols-1 md:grid-cols-3">
+        {pillars.map((pillar) => (
+          <article
+            key={pillar.id}
+            id={pillar.id}
+            className={`${toneClass[pillar.tone]} flex min-h-[360px] flex-col px-8 py-12 sm:px-10`}
+          >
+            <p className="text-[11px] font-semibold tracking-[0.18em] text-ink/40">{pillar.number}</p>
+            <BrandMark name={pillar.mark} className="mt-8 size-12 text-ink" />
+            <h3 className="mt-auto pt-16 font-serif text-[36px] tracking-[-0.03em] text-ink">
+              {pillar.title}
+            </h3>
+            <p className="mt-3 max-w-[28ch] text-[14px] leading-7 text-ink/65">{pillar.summary}</p>
+            <Link
+              href={`/about#${pillar.id}`}
+              className="mt-8 inline-flex w-fit items-center rounded-full border border-ink/15 bg-white/70 px-4 py-1.5 text-[10px] font-semibold tracking-[0.16em] text-ink uppercase"
+            >
+              Read more
+            </Link>
+          </article>
+        ))}
+      </section>
+
+      <SiteFooter />
+    </div>
   );
 }

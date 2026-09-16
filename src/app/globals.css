@@ -3,23 +3,31 @@
 @import "shadcn/tailwind.css";
 
 @theme {
-  /* Solmae brand colors */
-  --color-salmon: #FE9D94;
-  --color-lavender: #CCCEEF;
-  --color-red: #FF402E;
-  --color-offwhite: #FAF9F7;
-  --color-nearblack: #1A1A1A;
-  --color-gray: #6B6B6B;
-  --color-lightgray: #E5E3DE;
+  /* Solmae brand colors — v1 palette + existing product tokens */
+  --color-cream: #f8f4ee;
+  --color-blush: #f6e6e1;
+  --color-periwinkle: #d8dcf3;
+  --color-peach: #f5c9bc;
+  --color-coral: #e85a4c;
+  --color-ink: #1a1a1a;
+  --color-salmon: #fe9d94;
+  --color-lavender: #ccceef;
+  --color-red: #ff402e;
+  --color-offwhite: #f8f4ee;
+  --color-nearblack: #1a1a1a;
+  --color-gray: #6b6b6b;
+  --color-lightgray: #e5e3de;
 
-  /* Fonts */
-  --font-serif: var(--font-bodoni), Georgia, serif;
-  --font-sans: var(--font-nunito), system-ui, sans-serif;
+  /* Fonts: Playfair Display / Cormorant Garamond / Work Sans */
+  --font-serif: var(--font-playfair), "Playfair Display", Georgia, serif;
+  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-sans: var(--font-work), "Work Sans", system-ui, sans-serif;
 }
 
 @theme inline {
-  --font-sans: var(--font-nunito), system-ui, sans-serif;
-  --font-heading: var(--font-bodoni), Georgia, serif;
+  --font-sans: var(--font-work), "Work Sans", system-ui, sans-serif;
+  --font-heading: var(--font-playfair), "Playfair Display", Georgia, serif;
+  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
 
   /* Map shadcn tokens to Solmae brand */
   --color-background: var(--background);
@@ -49,7 +57,7 @@
 
 :root {
   /* Solmae light theme (no dark mode) */
-  --background: #FAF9F7;
+  --background: #f8f4ee;
   --foreground: #1A1A1A;
   --card: #FFFFFF;
   --card-foreground: #1A1A1A;

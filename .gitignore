@@ -10,6 +10,9 @@
 !.yarn/releases
 !.yarn/versions
 
+# local waitlist fallback (used only when Supabase is unset in development)
+/.data
+
 # testing
 /coverage
 
@@ -32,6 +35,7 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
 
 # vercel
 .vercel

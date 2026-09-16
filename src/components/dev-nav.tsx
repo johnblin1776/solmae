@@ -1,33 +1,32 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const SCREENS = [
-  { label: "1 · Landing",           href: "/" },
-  { label: "2 · Invite Gate",       href: "/invite" },
-  { label: "3a · Onboard: Role",    href: "/onboard" },
-  { label: "3b · Onboard: Auth",    href: "/onboard/auth" },
-  { label: "3c · Onboard: Profile", href: "/onboard/profile" },
-  { label: "4 · The Edition",       href: "/home" },
-  { label: "5 · Creators",          href: "/creators" },
-  { label: "6 · Creator Profile",   href: "/creators/nicole-keshishian" },
-  { label: "7 · Members",           href: "/members" },
-  { label: "7b · Member Profile",   href: "/members/jennifer-l" },
-  { label: "9 · Businesses",        href: "/businesses" },
-  { label: "9b · Biz Profile",      href: "/businesses/kalejunkie" },
-  { label: "10 · My Benches",       href: "/benches" },
-  { label: "10b · Bench Detail",    href: "/benches/morning-read" },
-  { label: "8 · Admin",             href: "/admin" },
-  { label: "Admin: Content",        href: "/admin/content" },
-  { label: "Admin: Creators",       href: "/admin/creators" },
-  { label: "Admin: Members",        href: "/admin/members" },
-  { label: "Admin: Ingest",         href: "/admin/ingest" },
-  { label: "Apply as Creator",      href: "/apply" },
+  { label: "Waitlist", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Founding 50", href: "/founding-50" },
+  { label: "Invite", href: "/invite" },
+  { label: "Onboard", href: "/onboard" },
+  { label: "Edition", href: "/home" },
+  { label: "Creators", href: "/creators" },
+  { label: "Members", href: "/members" },
+  { label: "Businesses", href: "/businesses" },
+  { label: "Benches", href: "/benches" },
+  { label: "Admin", href: "/admin" },
+  { label: "Apply (legacy)", href: "/apply" },
 ];
 
 export function DevNav() {
   const pathname = usePathname();
+  const router = useRouter();
+
+  async function lock() {
+    await fetch("/api/internal/lock", { method: "POST" });
+    router.push("/");
+    router.refresh();
+  }
 
   return (
     <div
@@ -57,21 +56,20 @@ export function DevNav() {
           fontWeight: 700,
         }}
       >
-        Solmae
+        Internal
       </span>
 
       {SCREENS.map(({ label, href }) => {
-        const isActive =
-          href === "/" ? pathname === "/" : pathname.startsWith(href);
+        const isActive = href === "/" ? pathname === "/" : pathname.startsWith(href);
 
         return (
           <Link
             key={href}
             href={href}
             style={{
-              background: isActive ? "#FE9D94" : "transparent",
-              border: `1px solid ${isActive ? "#FE9D94" : "#333"}`,
-              color: isActive ? "#1A1A1A" : "#888",
+              background: isActive ? "#E85A4C" : "transparent",
+              border: `1px solid ${isActive ? "#E85A4C" : "#333"}`,
+              color: isActive ? "#fff" : "#888",
               fontWeight: isActive ? 600 : 400,
               padding: "4px 12px",
               borderRadius: "20px",
@@ -86,6 +84,24 @@ export function DevNav() {
           </Link>
         );
       })}
+
+      <button
+        type="button"
+        onClick={lock}
+        style={{
+          marginLeft: "auto",
+          background: "transparent",
+          border: "1px solid #333",
+          color: "#888",
+          padding: "4px 12px",
+          borderRadius: "20px",
+          fontSize: "11px",
+          cursor: "pointer",
+          fontFamily: "inherit",
+        }}
+      >
+        Lock
+      </button>
     </div>
   );
 }
