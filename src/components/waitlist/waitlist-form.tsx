@@ -70,13 +70,13 @@ export function WaitlistForm({
               if (status === "error") setStatus("idle");
             }}
             placeholder="you@email.com"
-            className="w-full border-0 border-b border-ink/20 bg-transparent px-0 py-2.5 text-[15px] text-ink outline-none placeholder:text-ink/35 focus:border-ink"
+            className="min-h-11 w-full border-0 border-b border-ink/20 bg-transparent px-0 py-2.5 text-[15px] text-ink outline-none placeholder:text-ink/35 focus:border-ink sm:min-h-0"
           />
         </label>
         <button
           type="submit"
           disabled={status === "loading"}
-          className="shrink-0 pb-2.5 text-[12px] font-semibold tracking-[0.16em] text-coral uppercase transition-opacity disabled:opacity-50"
+          className="inline-flex min-h-11 shrink-0 items-center justify-center self-start text-[12px] font-semibold tracking-[0.16em] text-coral uppercase transition-opacity disabled:opacity-50 sm:min-h-0 sm:self-auto sm:items-end sm:pb-2.5"
         >
           {status === "loading" ? "Joining…" : "Join Us"}
         </button>

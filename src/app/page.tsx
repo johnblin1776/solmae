@@ -76,7 +76,7 @@ export default function LandingPage() {
             <p className="mt-3 max-w-[28ch] text-[14px] leading-7 text-ink/65">{pillar.summary}</p>
             <Link
               href={`/about#${pillar.id}`}
-              className="mt-8 inline-flex w-fit items-center rounded-full border border-ink/15 bg-white/70 px-4 py-1.5 text-[10px] font-semibold tracking-[0.16em] text-ink uppercase"
+              className="mt-8 inline-flex min-h-11 w-fit items-center rounded-full border border-ink/15 bg-white/70 px-4 py-1.5 text-[10px] font-semibold tracking-[0.16em] text-ink uppercase sm:min-h-0"
             >
               Read more
             </Link>

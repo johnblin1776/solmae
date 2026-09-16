@@ -12,7 +12,7 @@ export default function NotFound() {
       </p>
       <Link
         href="/"
-        className="mt-8 inline-flex items-center rounded-full bg-coral px-5 py-2.5 text-[11px] font-semibold tracking-[0.14em] text-white uppercase"
+        className="mt-8 inline-flex min-h-11 items-center rounded-full bg-coral px-5 py-2.5 text-[11px] font-semibold tracking-[0.14em] text-white uppercase sm:min-h-0"
       >
         Join Us
       </Link>
