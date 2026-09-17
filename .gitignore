@@ -10,7 +10,7 @@
 !.yarn/releases
 !.yarn/versions
 
-# local waitlist fallback (used only when Supabase is unset in development)
+# local waitlist fallback (used only when the Sheet webhook is unset in development)
 /.data
 
 # testing

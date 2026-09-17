@@ -43,6 +43,7 @@ export async function POST(request: Request) {
           : "Your application is in. We'll be in touch.",
     });
   } catch (error) {
+    console.error("Founding 50 persist failed", error);
     const message = error instanceof Error ? error.message : "Could not save your application.";
     return NextResponse.json({ error: message }, { status: 500 });
   }
