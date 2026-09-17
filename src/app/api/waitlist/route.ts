@@ -28,6 +28,7 @@ export async function POST(request: Request) {
           : "You're on the list. We'll be in touch.",
     });
   } catch (error) {
+    console.error("Waitlist persist failed", error);
     const message = error instanceof Error ? error.message : "Could not save your email.";
     return NextResponse.json({ error: message }, { status: 500 });
   }
