@@ -4,12 +4,12 @@ Women-centered discovery and community. This repo is a Next.js App Router app wi
 
 ## v1: public waitlist + internal product
 
-The public site is a waitlist landing (Option 03 — elevated card + three pillars). Product surfaces stay in the codebase but are not publicly reachable.
+The public site is a waitlist landing (elevated card + email capture). Inspiration / Education / Connection live on `/about` via `ThreePillarsSection` for later reuse on a fuller home page. Product surfaces stay in the codebase but are not publicly reachable.
 
 **Public**
 
-- `/` — waitlist landing with email capture
-- `/about` — mission, principles, six pillars
+- `/` — waitlist email capture only
+- `/about` — mission, three pillars, principles, ecosystem
 - `/founding-50` — Founding 50 explanation + application
 - `/contact` — contact / email capture
 - `/internal` — password gate for the product
